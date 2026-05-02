@@ -58,7 +58,7 @@
         }
       },
       "datePublished": "{{ $post->published_at?->toIso8601String() }}",
-      "dateModified": "{{ $post->updated_at->toIso8601String() }}",
+      "dateModified": "{{ $post->updated_at?->toIso8601String() }}",
       "mainEntityOfPage": { "@id": "{{ $postUrl }}" },
       "keywords": "{{ implode(', ', $post->tags ?? []) }}",
       "articleSection": "{{ $post->category_en }}",
