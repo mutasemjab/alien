@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\\(Get-Content \"c:\\\\xampp\\\\htdocs\\\\alien\\\\assets_front\\\\css\\\\style.css\" | Measure-Object -Line\\).Lines)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\xampp\\\\htdocs\\\\alien\\\\resources\\\\views\\\\admin\\\\job-positions\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\xampp\\\\htdocs\\\\alien\\\\resources\\\\views\\\\admin\\\\job-applications\")",
+      "Bash(Get-Content \"c:\\\\xampp\\\\htdocs\\\\alien\\\\assets_front\\\\js\\\\main.js\")",
+      "Bash(Measure-Object -Line)",
+      "Bash(Select-Object Lines)",
+      "PowerShell(\\(Get-Content \"c:\\\\xampp\\\\htdocs\\\\alien\\\\assets_front\\\\js\\\\main.js\"\\).Count)",
+      "PowerShell(New-Item -ItemType Directory -Path \"c:\\\\xampp\\\\htdocs\\\\alien\\\\assets\\\\admin\\\\uploads\\\\resumes\" -Force)"
+    ]
+  }
+}

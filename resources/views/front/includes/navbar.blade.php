@@ -26,7 +26,9 @@
     <li><a href="#services">{{ __('front.nav_services') }}</a></li>
     <li><a href="#work">{{ __('front.nav_work') }}</a></li>
     <li><a href="#clients">{{ __('front.nav_clients') }}</a></li>
+    <li><a href="#game">{{ __('front.nav_game') }}</a></li>
     <li><a href="#branches">{{ __('front.nav_branches') }}</a></li>
+    <li><a href="#careers">{{ __('front.nav_careers') }}</a></li>
     <li><a href="#contact" class="nav-cta">{{ __('front.nav_contact') }}</a></li>
 
     {{-- Language switcher --}}

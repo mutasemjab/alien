@@ -31,6 +31,22 @@
       <span class="nav-icon">🌍</span> Branches
     </a>
 
+    <a href="{{ route('admin.blogs.index') }}" class="{{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
+      <span class="nav-icon">✍️</span> Blog Posts
+    </a>
+
+    <div class="nav-group-label">Careers</div>
+    <a href="{{ route('admin.job-positions.index') }}" class="{{ request()->routeIs('admin.job-positions.*') ? 'active' : '' }}">
+      <span class="nav-icon">💼</span> Job Positions
+    </a>
+    <a href="{{ route('admin.job-applications.index') }}" class="{{ request()->routeIs('admin.job-applications.*') ? 'active' : '' }}">
+      <span class="nav-icon">📬</span> Applications
+      @php $newCount = \App\Models\JobApplication::where('status','new')->count(); @endphp
+      @if($newCount)
+        <span style="background:var(--gold);color:var(--dark);border-radius:50px;padding:.1rem .5rem;font-size:.65rem;font-weight:700;margin-left:.4rem;">{{ $newCount }}</span>
+      @endif
+    </a>
+
     <div class="nav-group-label">Configuration</div>
     <a href="{{ route('admin.settings.index') }}" class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
       <span class="nav-icon">🔧</span> Site Settings

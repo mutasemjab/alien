@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\JobApplicationController;
+use App\Http\Controllers\Admin\JobPositionController;
 use App\Http\Controllers\Admin\ClientController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
@@ -67,6 +70,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
 
         // Branches
         Route::resource('branches',     BranchController::class);
+
+        // Blog
+        Route::resource('blogs', BlogController::class);
+
+        // Careers
+        Route::resource('job-positions',   JobPositionController::class);
+        Route::resource('job-applications', JobApplicationController::class)->only(['index','show','update','destroy']);
 
         // Settings
         Route::get('settings',         [SettingController::class, 'index'])->name('settings.index');

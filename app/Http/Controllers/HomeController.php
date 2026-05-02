@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{HeroSection, Service, PortfolioItem, Client, Testimonial, Branch, Setting};
+use App\Models\{Blog, HeroSection, JobPosition, Service, PortfolioItem, Client, Testimonial, Branch, Setting};
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,8 +16,11 @@ class HomeController extends Controller
         $testimonials = Testimonial::active()->ordered()->get();
         $branches     = Branch::active()->ordered()->get();
 
+        $latestPosts   = Blog::active()->published()->ordered()->take(3)->get();
+        $openPositions = JobPosition::active()->ordered()->get();
+
         return view('front.home', compact(
-            'hero', 'services', 'portfolio', 'clients', 'testimonials', 'branches'
+            'hero', 'services', 'portfolio', 'clients', 'testimonials', 'branches', 'latestPosts', 'openPositions'
         ));
     }
 

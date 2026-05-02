@@ -310,6 +310,73 @@
 <div class="divider"></div>
 
 {{-- ========================================================
+     GAME
+     ======================================================== --}}
+<section id="game">
+  <div class="fu" style="text-align:center;max-width:600px;margin:0 auto;">
+    <div class="sec-label" style="justify-content:center;">{{ __('front.game_label') }}</div>
+    <h2 class="sec-title">Play <span class="gold-text">{{ __('front.game_title') }}</span></h2>
+    <p class="sec-desc" style="margin:0 auto;">{{ __('front.game_desc') }}</p>
+  </div>
+
+  <div class="game-wrap">
+    <div class="game-container">
+      <div class="game-header">
+        <div class="game-title-bar">⚡ ALIEN CODE DEFENDER</div>
+        <div class="game-stats-bar">
+          <div class="gstat">SCORE: <span id="scoreDisplay">0</span></div>
+          <div class="gstat">LIVES: <span id="livesDisplay">❤️❤️❤️</span></div>
+          <div class="gstat">LEVEL: <span id="levelDisplay">1</span></div>
+        </div>
+      </div>
+      <canvas id="gameCanvas" width="700" height="420"></canvas>
+      <div class="game-start-overlay" id="gameOverlay">
+        <div class="gso-title" id="gsoTitle">ALIEN CODE</div>
+        <div class="gso-sub" id="gsoSub">DEFENDER</div>
+        <div class="gso-instructions">
+          ← → or A D &nbsp;·&nbsp; Move Ship<br>
+          SPACE &nbsp;·&nbsp; Fire Laser<br>
+          Destroy all alien bugs!<br><br>
+          <span style="color:var(--gold)">📱 Drag to move · Tap to shoot on mobile</span>
+        </div>
+        <button class="gso-btn" id="gameStartBtn">▶ LAUNCH GAME</button>
+      </div>
+    </div>
+
+    <div class="game-sidebar">
+      <div class="game-controls-box fu d1">
+        <div class="gcb-title">Controls</div>
+        <div class="key-row"><div class="key" id="keyW">W</div></div>
+        <div class="key-row">
+          <div class="key" id="keyA">A</div>
+          <div class="key" id="keyS">S</div>
+          <div class="key" id="keyD">D</div>
+        </div>
+        <div class="key-row" style="margin-top:.5rem;">
+          <div class="key" style="min-width:120px;" id="keySP">SPACE</div>
+        </div>
+      </div>
+
+      <div class="game-high fu d2">
+        <div class="gh-title">High Scores</div>
+        <div class="gh-row"><span>ACE-1</span><span class="gh-score" id="hs1">0</span></div>
+        <div class="gh-row"><span>ACE-2</span><span class="gh-score" id="hs2">0</span></div>
+        <div class="gh-row"><span>ACE-3</span><span class="gh-score" id="hs3">0</span></div>
+      </div>
+    </div>
+  </div>
+
+  {{-- Mobile on-screen buttons (visible only on mobile) --}}
+  <div class="game-mobile-controls" id="gameMobileControls" style="display:none;">
+    <button class="gmb-btn" id="gmb-left" aria-label="Move left">◀</button>
+    <button class="gmb-btn gmb-fire" id="gmb-fire" aria-label="Fire">🔥 FIRE</button>
+    <button class="gmb-btn" id="gmb-right" aria-label="Move right">▶</button>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+{{-- ========================================================
      BRANCHES
      ======================================================== --}}
 <section id="branches">
@@ -339,6 +406,258 @@
       </div>
     </div>
     @endforeach
+  </div>
+</section>
+
+<div class="divider"></div>
+
+{{-- ========================================================
+     BLOG
+     ======================================================== --}}
+@if($latestPosts->count())
+<section id="blog">
+  <div class="fu" style="text-align:center;max-width:600px;margin:0 auto;">
+    <div class="sec-label" style="justify-content:center;">{{ __('front.blog_label') }}</div>
+    <h2 class="sec-title">{{ __('front.blog_title') }} <span class="gold-text">{{ __('front.blog_title2') }}</span></h2>
+    <p class="sec-desc" style="margin:0 auto;">{{ __('front.blog_desc') }}</p>
+  </div>
+
+  <div class="work-masonry" style="margin-top:3rem;">
+    @foreach($latestPosts as $i => $post)
+    <article class="wcard fu" style="transition-delay:{{ $i * 0.1 }}s;">
+      <a href="{{ route('blog.show', $post->slug) }}" style="text-decoration:none;display:block;">
+        <div class="wcard-vis">
+          <img src="{{ $post->image_url }}" alt="{{ $post->trans('title') }}"
+               style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;">
+        </div>
+      </a>
+      <div class="wcard-body">
+        <div class="wcard-tags">
+          @if($post->category_en)
+            <span class="wcard-tag">{{ $post->trans('category') }}</span>
+          @endif
+          <span class="wcard-tag">{{ $post->reading_time }} {{ __('front.blog_min_read') }}</span>
+        </div>
+        <h3 style="font-size:.95rem;margin:.5rem 0 .4rem;">
+          <a href="{{ route('blog.show', $post->slug) }}" style="color:var(--white);text-decoration:none;">
+            {{ $post->trans('title') }}
+          </a>
+        </h3>
+        <p style="font-size:.8rem;color:var(--muted);margin:0;">
+          {{ Str::limit($post->trans('excerpt') ?: strip_tags($post->trans('body')), 100) }}
+        </p>
+        <div style="margin-top:.8rem;">
+          <a href="{{ route('blog.show', $post->slug) }}"
+             style="font-size:.72rem;color:var(--gold);font-family:'Orbitron',sans-serif;text-decoration:none;">
+            {{ __('front.blog_read_more') }} →
+          </a>
+        </div>
+      </div>
+    </article>
+    @endforeach
+  </div>
+
+  <div style="text-align:center;margin-top:2.5rem;" class="fu d2">
+    <a href="{{ route('blog.index') }}" class="btn-ghost" style="font-size:.8rem;padding:.85rem 1.8rem;">
+      {{ __('front.blog_view_all') }}
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+@endif
+
+{{-- ========================================================
+     CAREERS
+     ======================================================== --}}
+<section id="careers">
+  {{-- Animated grid background --}}
+  <div class="careers-grid-bg" aria-hidden="true"></div>
+
+  <div class="fu" style="text-align:center;max-width:700px;margin:0 auto;position:relative;">
+    <div class="sec-label" style="justify-content:center;">{{ __('front.careers_label') }}</div>
+    <h2 class="sec-title">
+      {{ __('front.careers_title') }}
+      <span class="gold-text">{{ __('front.careers_title2') }}</span>
+    </h2>
+    <p class="sec-desc" style="margin:0 auto;">{{ __('front.careers_desc') }}</p>
+  </div>
+
+  {{-- Open positions --}}
+  @if($openPositions->count())
+  <div class="careers-positions" style="position:relative;">
+    @foreach($openPositions as $i => $pos)
+    <div class="career-card fu" style="transition-delay:{{ $i * 0.1 }}s;"
+         data-position="{{ $pos->trans('title') }}">
+      <div class="career-card-top">
+        <div>
+          <div class="career-dept">{{ $pos->trans('department') }}</div>
+          <h3 class="career-title">{{ $pos->trans('title') }}</h3>
+        </div>
+        <span class="career-type-badge" style="--tc:{{ $pos->type_color }}">
+          {{ $pos->type_label }}
+        </span>
+      </div>
+
+      @if($pos->trans('description'))
+      <p class="career-desc-text">{{ Str::limit($pos->trans('description'), 120) }}</p>
+      @endif
+
+      <div class="career-card-foot">
+        @if($pos->trans('location'))
+        <span class="career-meta-chip">📍 {{ $pos->trans('location') }}</span>
+        @endif
+        <button type="button" class="career-apply-btn" onclick="careerApply('{{ addslashes($pos->trans('title')) }}')">
+          {{ __('front.careers_apply') }} →
+        </button>
+      </div>
+    </div>
+    @endforeach
+  </div>
+  @else
+  <div style="text-align:center;padding:3rem 0;color:var(--muted);position:relative;" class="fu d1">
+    <div style="font-size:2.5rem;margin-bottom:.8rem;">🚀</div>
+    <p>{{ __('front.careers_no_positions') }}</p>
+  </div>
+  @endif
+
+  {{-- Application form --}}
+  <div class="careers-form-wrap fu d2" id="careerFormWrap">
+    <div class="careers-form-inner">
+
+      {{-- Decoration --}}
+      <div class="cform-deco" aria-hidden="true">
+        <div class="cform-orb"></div>
+      </div>
+
+      <div class="cform-header">
+        <div class="cform-icon">🚀</div>
+        <div>
+          <h3 class="cform-title">{{ __('front.careers_form_title') }}</h3>
+          <p class="cform-sub">{{ __('front.careers_form_sub') }}</p>
+        </div>
+      </div>
+
+      @if(session('career_success'))
+      <div class="cform-success">
+        <span style="font-size:1.4rem;">🎉</span>
+        <div>
+          <strong>{{ __('front.career_success') }}</strong><br>
+          <span style="font-size:.82rem;opacity:.8;">{{ __('front.career_success_sub') }}</span>
+        </div>
+      </div>
+      @endif
+
+      <form method="POST" action="{{ route('careers.apply') }}" enctype="multipart/form-data" id="careerForm">
+        @csrf
+
+        <div class="cform-grid">
+          {{-- Full Name --}}
+          <div class="cform-field">
+            <label class="cform-label">{{ __('front.careers_full_name') }} <span class="req">*</span></label>
+            <div class="cform-input-wrap">
+              <span class="cform-input-icon">👤</span>
+              <input type="text" name="full_name" value="{{ old('full_name') }}"
+                     placeholder="{{ __('front.careers_full_name_ph') }}" required maxlength="120"
+                     class="cform-input {{ $errors->has('full_name') ? 'cform-input-err' : '' }}">
+            </div>
+            @error('full_name')<div class="cform-err-msg">{{ $message }}</div>@enderror
+          </div>
+
+          {{-- Email --}}
+          <div class="cform-field">
+            <label class="cform-label">{{ __('front.careers_email') }} <span class="req">*</span></label>
+            <div class="cform-input-wrap">
+              <span class="cform-input-icon">✉️</span>
+              <input type="email" name="email" value="{{ old('email') }}"
+                     placeholder="you@example.com" required maxlength="120"
+                     class="cform-input {{ $errors->has('email') ? 'cform-input-err' : '' }}">
+            </div>
+            @error('email')<div class="cform-err-msg">{{ $message }}</div>@enderror
+          </div>
+
+          {{-- Phone --}}
+          <div class="cform-field">
+            <label class="cform-label">{{ __('front.careers_phone') }} <span class="req">*</span></label>
+            <div class="cform-input-wrap">
+              <span class="cform-input-icon">📞</span>
+              <input type="tel" name="phone" value="{{ old('phone') }}"
+                     placeholder="+962 7X XXX XXXX" required maxlength="30"
+                     class="cform-input {{ $errors->has('phone') ? 'cform-input-err' : '' }}">
+            </div>
+            @error('phone')<div class="cform-err-msg">{{ $message }}</div>@enderror
+          </div>
+
+          {{-- Position --}}
+          <div class="cform-field">
+            <label class="cform-label">{{ __('front.careers_position') }} <span class="req">*</span></label>
+            <div class="cform-input-wrap">
+              <span class="cform-input-icon">💼</span>
+              <select name="position" id="careerPositionSelect" required
+                      class="cform-input {{ $errors->has('position') ? 'cform-input-err' : '' }}">
+                <option value="">{{ __('front.careers_position_ph') }}</option>
+                @foreach($openPositions as $pos)
+                  <option value="{{ $pos->trans('title') }}"
+                    {{ old('position') === $pos->trans('title') ? 'selected' : '' }}>
+                    {{ $pos->trans('title') }}{{ $pos->trans('department') ? ' — '.$pos->trans('department') : '' }}
+                  </option>
+                @endforeach
+                <option value="Other / Open Application" {{ old('position') === 'Other / Open Application' ? 'selected' : '' }}>
+                  {{ __('front.careers_position_other') }}
+                </option>
+              </select>
+            </div>
+            @error('position')<div class="cform-err-msg">{{ $message }}</div>@enderror
+          </div>
+
+          {{-- Hear about us --}}
+          <div class="cform-field">
+            <label class="cform-label">{{ __('front.careers_hear') }} <span class="req">*</span></label>
+            <div class="cform-input-wrap">
+              <span class="cform-input-icon">📡</span>
+              <select name="hear_about_us" required
+                      class="cform-input {{ $errors->has('hear_about_us') ? 'cform-input-err' : '' }}">
+                <option value="">{{ __('front.careers_hear_ph') }}</option>
+                @foreach(['LinkedIn','Google Search','Instagram','Facebook','Friend / Referral','Job Board (Indeed, Glassdoor…)','GitHub','Other'] as $src)
+                  <option value="{{ $src }}" {{ old('hear_about_us') === $src ? 'selected' : '' }}>{{ $src }}</option>
+                @endforeach
+              </select>
+            </div>
+            @error('hear_about_us')<div class="cform-err-msg">{{ $message }}</div>@enderror
+          </div>
+
+          {{-- Resume upload --}}
+          <div class="cform-field">
+            <label class="cform-label">{{ __('front.careers_resume') }}</label>
+            <label class="cform-file-zone" id="resumeZone">
+              <input type="file" name="resume" id="resumeInput" accept=".pdf,.doc,.docx"
+                     style="display:none;" onchange="updateResumeLabel(this)">
+              <div class="cfile-icon">📎</div>
+              <div id="resumeLabel" class="cfile-text">
+                <strong>{{ __('front.careers_resume_cta') }}</strong><br>
+                <span>PDF, DOC, DOCX · Max 5 MB</span>
+              </div>
+            </label>
+            @error('resume')<div class="cform-err-msg">{{ $message }}</div>@enderror
+          </div>
+        </div>
+
+        {{-- Cover letter --}}
+        <div class="cform-field" style="margin-top:1.2rem;">
+          <label class="cform-label">{{ __('front.careers_cover') }}</label>
+          <textarea name="cover_letter" rows="4" maxlength="3000"
+                    placeholder="{{ __('front.careers_cover_ph') }}"
+                    class="cform-input cform-textarea">{{ old('cover_letter') }}</textarea>
+          @error('cover_letter')<div class="cform-err-msg">{{ $message }}</div>@enderror
+        </div>
+
+        <div style="display:flex;justify-content:center;margin-top:2rem;">
+          <button type="submit" class="btn-gold careers-submit-btn">
+            🚀 {{ __('front.careers_submit') }}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -388,6 +707,16 @@
         </div>
       </div>
       @endif
+
+       <div class="contact-terminal">
+        <div class="ct-line"><span class="ct-prompt">$ </span><span class="ct-cmd">ping alien-code.io</span></div>
+        <div class="ct-line"><span class="ct-out">✓ Reply from 44.230.x.x: time=1ms</span></div>
+        <div class="ct-line"><span class="ct-prompt">$ </span><span class="ct-cmd">status --check</span></div>
+        <div class="ct-line"><span class="ct-out">✓ All systems operational</span></div>
+        <div class="ct-line"><span class="ct-prompt">$ </span><span class="ct-cmd">response-time --estimate</span></div>
+        <div class="ct-line"><span class="ct-out">✓ Within 24 hours guaranteed</span></div>
+      </div>
+      
     </div>
 
     <div class="contact-card fu d1">

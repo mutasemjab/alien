@@ -9,6 +9,7 @@ return [
     'nav_services'   => 'خدماتنا',
     'nav_work'       => 'أعمالنا',
     'nav_clients'    => 'عملاؤنا',
+    'nav_game'       => '🎮 العب',
     'nav_branches'   => 'فروعنا',
     'nav_contact'    => 'تواصل معنا',
 
@@ -75,6 +76,54 @@ return [
     'form_message'    => 'حدثنا عن مشروعك',
     'form_submit'     => '🚀 أطلق مشروعي',
     'contact_sent'    => 'تم إرسال رسالتك! سنتواصل معك خلال ٢٤ ساعة.',
+
+    // Careers nav
+    'nav_careers'  => 'وظائف',
+
+    // Game
+    'game_label' => 'تجربة تفاعلية',
+    'game_title' => 'مطلق النار الفضائي',
+    'game_desc'  => 'دافع عن خوادمنا من الأخطاء الفضائية! استخدم مفاتيح الأسهم أو WASD للتحرك، SPACE للإطلاق.',
+
+    // Careers section
+    'careers_label'          => 'انضم إلينا',
+    'careers_title'          => 'كن جزءاً من',
+    'careers_title2'         => 'فريق ألين',
+    'careers_desc'           => 'نبحث دائماً عن العقول الاستثنائية. ابنِ المستقبل معنا — من عمّان إلى العالم.',
+    'careers_apply'          => 'تقدم الآن',
+    'careers_no_positions'   => 'لا توجد وظائف شاغرة حالياً — تابعنا قريباً أو أرسل طلبك المفتوح.',
+    'careers_form_title'     => 'أرسل طلب التوظيف',
+    'careers_form_sub'       => 'أدخل بياناتك وسنتواصل معك خلال ٣ أيام عمل.',
+    'career_success'         => 'تم استلام طلبك! سنتواصل معك قريباً.',
+    'career_success_sub'     => 'فريقنا يراجع كل طلب بعناية.',
+    'careers_full_name'      => 'الاسم الكامل',
+    'careers_full_name_ph'   => 'اسمك الكامل',
+    'careers_email'          => 'البريد الإلكتروني',
+    'careers_phone'          => 'رقم الهاتف',
+    'careers_position'       => 'الوظيفة',
+    'careers_position_ph'    => 'اختر وظيفة…',
+    'careers_position_other' => 'أخرى / طلب مفتوح',
+    'careers_hear'           => 'كيف سمعت عنا؟',
+    'careers_hear_ph'        => 'اختر مصدراً…',
+    'careers_resume'         => 'السيرة الذاتية',
+    'careers_resume_cta'     => 'انقر أو اسحب لرفع سيرتك الذاتية',
+    'careers_cover'          => 'رسالة التقديم',
+    'careers_cover_ph'       => 'أخبرنا لماذا تريد الانضمام إلى ألين كود وما الذي يميزك…',
+    'careers_submit'         => 'إرسال الطلب',
+
+    // Blog
+    'blog_label'         => 'مقالات ودروس',
+    'blog_title'         => 'من',
+    'blog_title2'        => 'مدونتنا',
+    'blog_desc'          => 'تعمق في هندسة البرمجيات والذكاء الاصطناعي والبنية السحابية ومستقبل التقنية.',
+    'blog_meta_title'    => 'المدونة — ألين كود',
+    'blog_meta_desc'     => 'رؤى هندسة البرمجيات ودروس الذكاء الاصطناعي ونصائح البنية السحابية من فريق ألين كود.',
+    'blog_min_read'      => 'دقيقة قراءة',
+    'blog_read_more'     => 'اقرأ المزيد',
+    'blog_view_all'      => 'عرض جميع المقالات',
+    'blog_empty'         => 'لا توجد مقالات بعد. تابعنا قريباً.',
+    'blog_related_label' => 'واصل القراءة',
+    'blog_related_title' => 'مقالات ذات صلة',
 
     // Footer
     'footer_tagline'  => 'نبني مستقبل البرمجيات، سطراً استثنائياً في كل مرة.',

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\FrontCategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CareerController;
+use App\Http\Controllers\FrontBlogController;
 use App\Http\Controllers\FrontProjectController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontAboutController;
@@ -33,4 +35,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
   Route::get('/portfolio',    [HomeController::class, 'portfolio'])->name('portfolio');
   Route::get('/contact',      [HomeController::class, 'contact'])->name('contact');
   Route::post('/contact',     [HomeController::class, 'sendContact'])->name('contact.send');
+
+  // Blog
+  Route::get('/blog',         [FrontBlogController::class, 'index'])->name('blog.index');
+  Route::get('/blog/{slug}',  [FrontBlogController::class, 'show'])->name('blog.show');
+
+  // Careers
+  Route::post('/careers/apply', [CareerController::class, 'apply'])->name('careers.apply');
 });

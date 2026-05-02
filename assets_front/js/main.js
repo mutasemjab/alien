@@ -781,13 +781,51 @@ function initGame() {
   });
   setInterval(() => { if (shootCooldown > 0) shootCooldown--; }, 16);
 
-  // Mobile tap
+  // Mobile — tap to shoot
   canvas.addEventListener('touchstart', e => {
     e.preventDefault();
     if (gameState === 'playing' && shootCooldown <= 0) {
       bullets.push({ x: ship.x, y: ship.y - 20, enemy: false }); shootCooldown = 15;
     }
-  });
+  }, { passive: false });
+
+  // Mobile — drag to move ship (scales touch X to canvas coordinate space)
+  canvas.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (gameState === 'playing') {
+      const rect  = canvas.getBoundingClientRect();
+      const scaleX = W / rect.width;
+      const touchX = (e.touches[0].clientX - rect.left) * scaleX;
+      ship.x = Math.max(24, Math.min(W - 24, touchX));
+    }
+  }, { passive: false });
+
+  // Mobile on-screen buttons — wire up after DOM is ready
+  const mobileControls = document.getElementById('gameMobileControls');
+  if (mobileControls) {
+    mobileControls.style.display = 'flex';
+
+    const btnLeft  = document.getElementById('gmb-left');
+    const btnRight = document.getElementById('gmb-right');
+    const btnFire  = document.getElementById('gmb-fire');
+
+    if (btnLeft) {
+      btnLeft.addEventListener('touchstart',  () => { keys['ArrowLeft']  = true;  }, { passive: true });
+      btnLeft.addEventListener('touchend',    () => { keys['ArrowLeft']  = false; }, { passive: true });
+    }
+    if (btnRight) {
+      btnRight.addEventListener('touchstart', () => { keys['ArrowRight'] = true;  }, { passive: true });
+      btnRight.addEventListener('touchend',   () => { keys['ArrowRight'] = false; }, { passive: true });
+    }
+    if (btnFire) {
+      btnFire.addEventListener('touchstart', e => {
+        e.preventDefault();
+        if (gameState === 'playing' && shootCooldown <= 0) {
+          bullets.push({ x: ship.x, y: ship.y - 20, enemy: false }); shootCooldown = 15;
+        }
+      }, { passive: false });
+    }
+  }
 
   // Start button
   startBtn.onclick = () => {
@@ -997,6 +1035,75 @@ function initContact() {
 }
 
 // ============================================================
+// CAREERS — position quick-apply + file drop zone
+// ============================================================
+function careerApply(positionName) {
+  const select = document.getElementById('careerPositionSelect');
+  if (select) {
+    // Try to match by option text
+    let matched = false;
+    for (let i = 0; i < select.options.length; i++) {
+      if (select.options[i].text.trim() === positionName.trim()) {
+        select.selectedIndex = i;
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      // Fall back to "Other" option
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === 'other' || select.options[i].value === '') {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  }
+  const form = document.getElementById('careerForm');
+  if (form) {
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Brief glow pulse to signal the form is ready
+    form.style.transition = 'box-shadow .3s';
+    form.style.boxShadow = '0 0 40px rgba(245,168,0,.35)';
+    setTimeout(() => { form.style.boxShadow = ''; }, 1200);
+  }
+}
+
+function updateResumeLabel(input) {
+  const label = document.getElementById('resumeLabel');
+  if (label && input.files.length) label.innerHTML = '<strong>' + input.files[0].name + '</strong>';
+}
+
+function initCareersFileZone() {
+  const zone  = document.getElementById('resumeZone');
+  const input = document.getElementById('resumeInput');
+  const label = document.getElementById('resumeLabel');
+  if (!zone || !input) return;
+
+  zone.addEventListener('click', () => input.click());
+
+  zone.addEventListener('dragover', e => {
+    e.preventDefault();
+    zone.classList.add('drag-over');
+  });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    if (e.dataTransfer.files.length) {
+      const dt = new DataTransfer();
+      dt.items.add(e.dataTransfer.files[0]);
+      input.files = dt.files;
+      if (label) label.textContent = e.dataTransfer.files[0].name;
+    }
+  });
+
+  input.addEventListener('change', () => {
+    if (input.files.length && label) label.textContent = input.files[0].name;
+  });
+}
+
+// ============================================================
 // MAIN INIT — called after loader completes (or on DOMContentLoaded)
 // ============================================================
 function startAll() {
@@ -1010,4 +1117,5 @@ function startAll() {
   initCounters();
   initNav();
   initContact();
+  initCareersFileZone();
 }
