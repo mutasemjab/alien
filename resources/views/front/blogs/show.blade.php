@@ -20,7 +20,7 @@
 <meta property="og:description"            content="{{ $seoDesc }}">
 <meta property="og:image"                  content="{{ $post->image_url }}">
 <meta property="article:published_time"    content="{{ $post->published_at?->toIso8601String() }}">
-<meta property="article:modified_time"     content="{{ $post->updated_at->toIso8601String() }}">
+<meta property="article:modified_time"     content="{{ $post->updated_at?->toIso8601String() }}">
 @if($post->author)<meta property="article:author" content="{{ $post->author }}">@endif
 @if($post->category_en)<meta property="article:section" content="{{ $post->category_en }}">@endif
 @foreach($post->tags ?? [] as $tag)
