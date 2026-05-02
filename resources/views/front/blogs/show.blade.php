@@ -137,7 +137,7 @@
 
   {{-- Body --}}
   <div class="blog-body" style="{{ $isAr ? 'direction:rtl;text-align:right;' : '' }}">
-    {!! nl2br(e($post->trans('body'))) !!}
+    {!! $post->trans('body') !!}
   </div>
 
   {{-- Share --}}
