@@ -94,7 +94,7 @@
      ======================================================== --}}
 <section id="about">
   <div class="about-grid">
-    <div class="about-visual-wrap fu">
+    <div class="about-visual-wrap fu" dir="ltr">
       {{-- Code window --}}
       <div class="about-holo">
         <div class="holo-screen">
@@ -735,7 +735,7 @@
             </label>
             <input type="text" name="name" value="{{ old('name') }}"
                    style="width:100%;background:rgba(10,7,20,.7);border:1px solid rgba(245,168,0,.12);border-radius:8px;padding:.75rem 1rem;color:var(--text);font-family:'Exo 2','Cairo',sans-serif;font-size:.88rem;outline:none;"
-                   dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" required>
+                   dir="ltr" required>
             @error('name') <div style="color:#f87171;font-size:.75rem;margin-top:.2rem;">{{ $message }}</div> @enderror
           </div>
           <div class="form-field" style="margin-bottom:1rem;">
@@ -755,7 +755,7 @@
           </label>
           <textarea name="message" rows="4" required
                     style="width:100%;background:rgba(10,7,20,.7);border:1px solid rgba(245,168,0,.12);border-radius:8px;padding:.75rem 1rem;color:var(--text);font-family:'Exo 2','Cairo',sans-serif;font-size:.88rem;outline:none;resize:vertical;"
-                    dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">{{ old('message') }}</textarea>
+                    dir="ltr">{{ old('message') }}</textarea>
           @error('message') <div style="color:#f87171;font-size:.75rem;margin-top:.2rem;">{{ $message }}</div> @enderror
         </div>
 
