@@ -2,8 +2,8 @@
 
 <footer>
   <div class="footer-top">
-
-    {{-- Brand --}}
+  @php $services = \App\Models\Service::take(6)->get(); @endphp
+{{-- Brand --}}
     <div class="footer-brand">
       @php $logoPath = \App\Models\Setting::getValue('logo'); @endphp
       @if($logoPath)
@@ -31,7 +31,7 @@
     <div class="footer-col">
       <h4>{{ __('front.footer_services') }}</h4>
       <ul>
-        @foreach($services->take(6) as $s)
+        @foreach($services as $s)
           <li><a href="#services">{{ $s->trans('title') }}</a></li>
         @endforeach
       </ul>
