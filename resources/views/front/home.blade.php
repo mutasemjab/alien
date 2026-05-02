@@ -666,7 +666,7 @@
 {{-- ========================================================
      CONTACT
      ======================================================== --}}
-<section id="contact">
+<section id="contact" dir="ltr">
   <div class="fu" style="text-align:center;max-width:600px;margin:0 auto;">
     <div class="sec-label" style="justify-content:center;">{{ __('front.contact_label') }}</div>
     <h2 class="sec-title">{{ __('front.contact_title') }} <span class="gold-text">{{ __('front.contact_title2') }}</span></h2>
