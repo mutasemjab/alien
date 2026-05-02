@@ -1624,6 +1624,29 @@ section {
   text-transform: none;
 }
 
+/* Contact section always LTR regardless of locale */
+[lang="ar"] #contact,
+[dir="rtl"] #contact {
+  direction: ltr;
+  text-align: left;
+}
+[lang="ar"] #contact .contact-wrap,
+[dir="rtl"] #contact .contact-wrap,
+[lang="ar"] #contact .contact-info-item,
+[dir="rtl"] #contact .contact-info-item,
+[lang="ar"] #contact .form-row-2,
+[dir="rtl"] #contact .form-row-2,
+[lang="ar"] #contact .contact-card,
+[dir="rtl"] #contact .contact-card,
+[lang="ar"] #contact .contact-terminal,
+[dir="rtl"] #contact .contact-terminal {
+  direction: ltr;
+}
+[lang="ar"] #contact label,
+[dir="rtl"] #contact label {
+  text-align: left;
+}
+
 .contact-terminal {
   background: rgba(10, 7, 20, .8);
   border: 1px solid rgba(245, 168, 0, .1);
