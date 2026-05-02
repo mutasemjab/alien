@@ -1578,9 +1578,6 @@ section {
   margin-top: 4rem;
 }
 
-[dir="rtl"] .contact-wrap {
-  direction: rtl;
-}
 
 .contact-info-item {
   display: flex;
