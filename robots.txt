@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /admin/
+Disallow: /storage/
+Disallow: /assets/admin/uploads/resumes/
+
+# Allow all public content
+Allow: /
+
+Sitemap: https://alien-code.net/sitemap.xml

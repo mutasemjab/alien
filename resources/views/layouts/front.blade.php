@@ -20,17 +20,33 @@
     $metaDesc  = trim(View::yieldContent('meta-desc'))
         ?: ($isAr ? $hero->meta_description_ar : $hero->meta_description_en);
 
-    $metaKw    = $isAr
-        ? ($hero->meta_keywords_ar ?: $s('meta_keywords_ar'))
-        : ($hero->meta_keywords_en ?: $s('meta_keywords_en'));
+    $metaKw    = trim(View::yieldContent('meta-keywords'))
+        ?: ($isAr
+            ? ($hero->meta_keywords_ar ?: $s('meta_keywords_ar'))
+            : ($hero->meta_keywords_en ?: $s('meta_keywords_en')));
 
     $ogTitle   = $isAr ? ($hero->og_title_ar ?: $metaTitle) : ($hero->og_title_en ?: $metaTitle);
     $ogDesc    = $isAr ? ($hero->og_description_ar ?: $metaDesc) : ($hero->og_description_en ?: $metaDesc);
     $ogImage   = $hero->og_image ? asset('storage/'.$hero->og_image) : asset('images/og-default.jpg');
-    $canonical = $isAr ? ($hero->canonical_url_ar ?: url()->current()) : ($hero->canonical_url_en ?: url()->current());
-    $robots    = $hero->robots ?? 'index, follow';
+
+    // Canonical: use per-page override first, then hero section only on homepage, else current URL.
+    $isHomePage = \Illuminate\Support\Facades\Route::currentRouteName() === 'home';
+    $canonicalOverride = trim(View::yieldContent('canonical'));
+    if ($canonicalOverride) {
+        $canonical = $canonicalOverride;
+    } elseif ($isHomePage) {
+        $canonical = $isAr
+            ? ($hero->canonical_url_ar ?: url()->current())
+            : ($hero->canonical_url_en ?: url()->current());
+    } else {
+        $canonical = url()->current();
+    }
+
+    $robotsOverride = trim(View::yieldContent('meta-robots'));
+    $robots  = $robotsOverride ?: ($hero->robots ?? 'index, follow');
+
     $siteName  = $s('site_name_'.$locale, 'Alien Code');
-    $siteUrl   = $s('canonical_url', 'https://alien-code.io');
+    $siteUrl   = $s('canonical_url', 'https://alien-code.net');
     $gaId      = $s('ga_id');
     $gtmId     = $s('gtm_id');
 
@@ -56,7 +72,7 @@
   {{-- ── Hreflang ─────────────────────────────────────────── --}}
   <link rel="alternate" hreflang="en"        href="{{ LaravelLocalization::getLocalizedURL('en',null,[],true) }}">
   <link rel="alternate" hreflang="ar"        href="{{ LaravelLocalization::getLocalizedURL('ar',null,[],true) }}">
-  <link rel="alternate" hreflang="x-default" href="{{ $siteUrl }}">
+  <link rel="alternate" hreflang="x-default" href="{{ LaravelLocalization::getLocalizedURL('en',null,[],true) }}">
 
   {{-- ── Open Graph ──────────────────────────────────────── --}}
   <meta property="og:type"             content="website">
@@ -153,19 +169,24 @@
   }
   </script>
 
-  {{-- ── FAQ Schema ───────────────────────────────────────── --}}
+  {{-- ── FAQ Schema (homepage only) ────────────────────────── --}}
+  @if($isHomePage)
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type":"Question","name":"What services does Alien Code provide?","acceptedAnswer":{ "@type":"Answer","text":"Alien Code provides web development, mobile app development, AI and machine learning, cloud and DevOps, blockchain and Web3 development, and UI/UX design services." } },
-      { "@type":"Question","name":"Where is Alien Code located?","acceptedAnswer":{ "@type":"Answer","text":"Alien Code is headquartered in Amman, Jordan with offices in Dubai (UAE), London (UK), and New York (USA)." } },
-      { "@type":"Question","name":"How many projects has Alien Code delivered?","acceptedAnswer":{ "@type":"Answer","text":"Alien Code has delivered over {{ $hero->stat_projects }} projects worldwide with a {{ $hero->stat_satisfaction }}% client satisfaction rate." } },
-      { "@type":"Question","name":"Does Alien Code work with startups?","acceptedAnswer":{ "@type":"Answer","text":"Yes. Alien Code works with both early-stage startups and Fortune 500 enterprises, building scalable software solutions tailored to each client's needs." } }
+      { "@type":"Question","name":"What services does Alien Code provide?","acceptedAnswer":{ "@type":"Answer","text":"Alien Code provides custom software development, web application development, mobile app development, ERP systems, e-commerce platforms, AI and automation solutions, and UI/UX design services." } },
+      { "@type":"Question","name":"Where is Alien Code located?","acceptedAnswer":{ "@type":"Answer","text":"Alien Code is headquartered in Amman, Jordan. We serve clients across Jordan and the wider Middle East region." } },
+      { "@type":"Question","name":"Does Alien Code work with businesses in Jordan?","acceptedAnswer":{ "@type":"Answer","text":"Yes. Alien Code is a Jordan-based software company primarily serving businesses in Amman and across Jordan, as well as regional clients in the Middle East." } },
+      { "@type":"Question","name":"How do I get a software development quote from Alien Code?","acceptedAnswer":{ "@type":"Answer","text":"You can contact Alien Code through the contact form on this website or by calling our Amman office directly. We typically respond within one business day." } }
     ]
   }
   </script>
+  @endif
+
+  {{-- ── Per-page extra head content ───────────────────────── --}}
+  @yield('page-schema')
 
   {{-- ── Fonts ────────────────────────────────────────────── --}}
   <link rel="preconnect" href="https://fonts.googleapis.com">

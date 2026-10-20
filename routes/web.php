@@ -1,45 +1,44 @@
 <?php
 
-use App\Http\Controllers\FrontCategoryController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\FrontBlogController;
-use App\Http\Controllers\FrontProjectController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FrontAboutController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
-
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group whichf
-| contains the "web" middleware group. Now create something great!
-|
 */
 
+// ── Sitemap & robots (outside locale group — no locale prefix) ─────────
+Route::get('/sitemap.xml',          [SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap-pages.xml',    [SitemapController::class, 'pages'])->name('sitemap.pages');
+Route::get('/sitemap-blog.xml',     [SitemapController::class, 'blog'])->name('sitemap.blog');
+Route::get('/sitemap-services.xml', [SitemapController::class, 'services'])->name('sitemap.services');
 
-Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
+// ── Localised front-end routes ─────────────────────────────────────────
+Route::group([
+    'prefix'     => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+], function () {
 
+    // Core pages
+    Route::get('/',          [HomeController::class, 'index'])->name('home');
+    Route::get('/services',  [HomeController::class, 'services'])->name('services');
+    Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('portfolio');
+    Route::get('/contact',   [HomeController::class, 'contact'])->name('contact');
+    Route::post('/contact',  [HomeController::class, 'sendContact'])->name('contact.send');
 
+    // Service detail pages
+    Route::get('/services/{slug}', [HomeController::class, 'serviceDetail'])->name('services.show');
 
-  Route::get('/', [HomeController::class, 'index'])->name('home');
+    // Blog (articles + landing pages share the same URL pattern; controller dispatches template)
+    Route::get('/blog',        [FrontBlogController::class, 'index'])->name('blog.index');
+    Route::get('/blog/{slug}', [FrontBlogController::class, 'show'])->name('blog.show');
 
-  // Optional detail pages
-  Route::get('/services',     [HomeController::class, 'services'])->name('services');
-  Route::get('/portfolio',    [HomeController::class, 'portfolio'])->name('portfolio');
-  Route::get('/contact',      [HomeController::class, 'contact'])->name('contact');
-  Route::post('/contact',     [HomeController::class, 'sendContact'])->name('contact.send');
-
-  // Blog
-  Route::get('/blog',         [FrontBlogController::class, 'index'])->name('blog.index');
-  Route::get('/blog/{slug}',  [FrontBlogController::class, 'show'])->name('blog.show');
-
-  // Careers
-  Route::post('/careers/apply', [CareerController::class, 'apply'])->name('careers.apply');
+    // Careers
+    Route::post('/careers/apply', [CareerController::class, 'apply'])->name('careers.apply');
 });

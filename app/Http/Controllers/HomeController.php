@@ -16,11 +16,12 @@ class HomeController extends Controller
         $testimonials = Testimonial::active()->ordered()->get();
         $branches     = Branch::active()->ordered()->get();
 
-        $latestPosts   = Blog::active()->published()->ordered()->take(3)->get();
+        $latestPosts   = Blog::active()->published()->articles()->ordered()->take(3)->get();
         $openPositions = JobPosition::active()->ordered()->get();
 
         return view('front.home', compact(
-            'hero', 'services', 'portfolio', 'clients', 'testimonials', 'branches', 'latestPosts', 'openPositions'
+            'hero', 'services', 'portfolio', 'clients', 'testimonials',
+            'branches', 'latestPosts', 'openPositions'
         ));
     }
 
@@ -28,6 +29,23 @@ class HomeController extends Controller
     {
         $services = Service::active()->ordered()->get();
         return view('front.services', compact('services'));
+    }
+
+    public function serviceDetail(string $slug)
+    {
+        $service = Service::active()
+            ->where('slug', $slug)
+            ->whereNotNull('slug')
+            ->firstOrFail();
+
+        $relatedServices = Service::active()
+            ->hasDetail()
+            ->where('id', '!=', $service->id)
+            ->ordered()
+            ->take(4)
+            ->get();
+
+        return view('front.services.show', compact('service', 'relatedServices'));
     }
 
     public function portfolio()
@@ -50,7 +68,6 @@ class HomeController extends Controller
             'message' => 'required|string',
         ]);
 
-        // Send mail / save to DB — integrate with your mail setup
         // Mail::to(Setting::getValue('contact_email'))->send(new ContactMail($request->all()));
 
         return back()->with('success', __('front.contact_sent'));

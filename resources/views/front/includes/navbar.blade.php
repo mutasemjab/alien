@@ -22,14 +22,15 @@
 
   {{-- Nav links --}}
   <ul id="navMenu">
-    <li><a href="#about">{{ __('front.nav_about') }}</a></li>
-    <li><a href="#services">{{ __('front.nav_services') }}</a></li>
-    <li><a href="#work">{{ __('front.nav_work') }}</a></li>
-    <li><a href="#clients">{{ __('front.nav_clients') }}</a></li>
-    <li><a href="#game">{{ __('front.nav_game') }}</a></li>
-    <li><a href="#branches">{{ __('front.nav_branches') }}</a></li>
-    <li><a href="#careers">{{ __('front.nav_careers') }}</a></li>
-    <li><a href="#contact" class="nav-cta">{{ __('front.nav_contact') }}</a></li>
+    @php $currentRoute = \Illuminate\Support\Facades\Route::currentRouteName(); @endphp
+    <li><a href="{{ \Illuminate\Support\Facades\Route::currentRouteName() === 'home' ? '#about' : route('home').'#about' }}">{{ __('front.nav_about') }}</a></li>
+    <li><a href="{{ route('services') }}"  {{ $currentRoute === 'services'  ? 'aria-current="page"' : '' }}>{{ __('front.nav_services') }}</a></li>
+    <li><a href="{{ route('portfolio') }}" {{ $currentRoute === 'portfolio' ? 'aria-current="page"' : '' }}>{{ __('front.nav_work') }}</a></li>
+    <li><a href="{{ \Illuminate\Support\Facades\Route::currentRouteName() === 'home' ? '#clients' : route('home').'#clients' }}">{{ __('front.nav_clients') }}</a></li>
+    <li><a href="{{ \Illuminate\Support\Facades\Route::currentRouteName() === 'home' ? '#game' : route('home').'#game' }}">{{ __('front.nav_game') }}</a></li>
+    <li><a href="{{ \Illuminate\Support\Facades\Route::currentRouteName() === 'home' ? '#branches' : route('home').'#branches' }}">{{ __('front.nav_branches') }}</a></li>
+    <li><a href="{{ route('blog.index') }}" {{ $currentRoute === 'blog.index' ? 'aria-current="page"' : '' }}>{{ __('front.blog_label') ?? 'Blog' }}</a></li>
+    <li><a href="{{ route('contact') }}" class="nav-cta" {{ $currentRoute === 'contact' ? 'aria-current="page"' : '' }}>{{ __('front.nav_contact') }}</a></li>
 
     {{-- Language switcher --}}
     <li style="{{ app()->getLocale() === 'ar' ? 'margin-right:1rem;' : 'margin-left:1rem;' }}">

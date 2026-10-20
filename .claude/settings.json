@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(txt|xml|webmanifest\\)$\")",
+      "Bash(xargs wc *)"
+    ]
+  }
+}

@@ -15,6 +15,7 @@ class Blog extends Model
         'body_en', 'body_ar', 'image', 'category_en', 'category_ar',
         'tags', 'author', 'meta_title_en', 'meta_title_ar',
         'meta_desc_en', 'meta_desc_ar', 'is_active', 'published_at', 'sort_order',
+        'type',
     ];
 
     protected $casts = [
@@ -23,9 +24,11 @@ class Blog extends Model
         'published_at' => 'datetime',
     ];
 
-    public function scopeActive($q)   { return $q->where('is_active', true); }
-    public function scopePublished($q){ return $q->where('published_at', '<=', now()); }
-    public function scopeOrdered($q)  { return $q->orderByDesc('published_at'); }
+    public function scopeActive($q)       { return $q->where('is_active', true); }
+    public function scopePublished($q)    { return $q->where('published_at', '<=', now()); }
+    public function scopeOrdered($q)      { return $q->orderByDesc('published_at'); }
+    public function scopeArticles($q)     { return $q->where('type', 'article'); }
+    public function scopeLandingPages($q) { return $q->where('type', 'landing_page'); }
 
     public function getImageUrlAttribute(): string
     {

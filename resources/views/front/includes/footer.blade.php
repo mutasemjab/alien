@@ -2,7 +2,10 @@
 
 <footer>
   <div class="footer-top">
-  @php $services = \App\Models\Service::take(6)->get(); @endphp
+  @php
+    $services = \App\Models\Service::active()->ordered()->take(6)->get();
+    $branches = $branches ?? \App\Models\Branch::active()->ordered()->get();
+  @endphp
 {{-- Brand --}}
     <div class="footer-brand">
       @php $logoPath = \App\Models\Setting::getValue('logo'); @endphp
@@ -32,7 +35,13 @@
       <h4>{{ __('front.footer_services') }}</h4>
       <ul>
         @foreach($services as $s)
-          <li><a href="#services">{{ $s->trans('title') }}</a></li>
+          <li>
+            @if($s->has_detail)
+              <a href="{{ route('services.show', $s->slug) }}">{{ $s->trans('title') }}</a>
+            @else
+              <a href="{{ route('services') }}">{{ $s->trans('title') }}</a>
+            @endif
+          </li>
         @endforeach
       </ul>
     </div>
@@ -41,20 +50,20 @@
     <div class="footer-col">
       <h4>{{ __('front.footer_company') }}</h4>
       <ul>
-        <li><a href="#about">{{ __('front.nav_about') }}</a></li>
-        <li><a href="#work">{{ __('front.portfolio_label') }}</a></li>
-        <li><a href="#clients">{{ __('front.clients_label') }}</a></li>
-        <li><a href="#branches">{{ __('front.nav_branches') }}</a></li>
+        <li><a href="{{ route('services') }}">{{ __('front.nav_services') }}</a></li>
+        <li><a href="{{ route('portfolio') }}">{{ __('front.portfolio_label') }}</a></li>
+        <li><a href="{{ route('blog.index') }}">{{ __('front.blog_label') }}</a></li>
+        <li><a href="{{ route('contact') }}">{{ __('front.nav_contact') }}</a></li>
       </ul>
     </div>
 
-    {{-- Offices --}}
+    {{-- Contact --}}
     <div class="footer-col">
       <h4>{{ __('front.footer_offices') }}</h4>
       <ul>
         @foreach($branches as $b)
           <li>
-            <a href="#branches">
+            <a href="{{ route('contact') }}">
               {{ $b->flag_emoji }} {{ $b->trans('city') }}
             </a>
           </li>
