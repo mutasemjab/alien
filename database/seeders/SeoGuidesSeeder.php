@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Blog;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class SeoGuidesSeeder extends Seeder
 {
@@ -12,22 +12,16 @@ class SeoGuidesSeeder extends Seeder
         $pages = $this->pages();
 
         foreach ($pages as $page) {
-            $existing = DB::table('blogs')
-                ->where('slug', $page['slug'])
-                ->orWhere('title_en', $page['title_en'])
-                ->first();
-
-            if ($existing) {
+            if (Blog::where('slug', $page['slug'])->orWhere('title_en', $page['title_en'])->exists()) {
                 $this->command->line("  skip  {$page['slug']}");
                 continue;
             }
 
-            DB::table('blogs')->insert(array_merge($page, [
+            Blog::create(array_merge($page, [
                 'type'         => 'landing_page',
-                'status'       => 'active',
+                'is_active'    => true,
                 'published_at' => now(),
-                'created_at'   => now(),
-                'updated_at'   => now(),
+                'author'       => 'Alien Code',
             ]));
 
             $this->command->info("  seeded {$page['slug']}");
@@ -51,7 +45,7 @@ class SeoGuidesSeeder extends Seeder
                 'meta_desc_ar' => 'كم تكلفة تصميم موقع في الأردن 2025؟ تفصيل كامل للأسعار حسب النوع: صفحة هبوط، موقع أعمال، متجر إلكتروني، تطبيق ويب مخصص.',
                 'category_en'  => 'Guides',
                 'category_ar'  => 'أدلة',
-                'tags'         => json_encode(['Website Cost', 'Jordan', 'Pricing', 'Web Development']),
+                'tags'         => ['Website Cost', 'Jordan', 'Pricing', 'Web Development'],
                 'body_en'      => '<h2>Website Cost in Jordan — 2025 Market Rates</h2>
 <p>The most common question we hear from Jordanian business owners is: "How much does a website cost?" The honest answer is: it depends on what you need. This guide gives you real numbers from the Jordanian market so you can budget confidently.</p>
 
@@ -148,7 +142,7 @@ class SeoGuidesSeeder extends Seeder
                 'meta_desc_ar' => 'كم تكلفة تطبيق جوال في الأردن 2025؟ تفصيل أسعار iOS وAndroid وFlutter حسب التعقيد — من التطبيقات البسيطة (2,000 د.أ) إلى المؤسسية (+50,000 د.أ).',
                 'category_en'  => 'Guides',
                 'category_ar'  => 'أدلة',
-                'tags'         => json_encode(['Mobile App Cost', 'Jordan', 'iOS', 'Android', 'Flutter']),
+                'tags'         => ['Mobile App Cost', 'Jordan', 'iOS', 'Android', 'Flutter'],
                 'body_en'      => '<h2>Mobile App Development Costs in Jordan (2025)</h2>
 <p>Building a mobile app in Jordan is more affordable than in the US or Europe — but the range is still enormous. A simple utility app might cost 2,000 JD; a full-featured marketplace with real-time tracking might cost 40,000 JD. Here is how to think about it.</p>
 
@@ -218,7 +212,7 @@ class SeoGuidesSeeder extends Seeder
                 'meta_desc_ar' => 'هل يجب أن تشتري برنامجاً جاهزاً أم تبني برنامجاً مخصصاً لعملك في الأردن؟ قارن التكلفة والمرونة والتوسعية بهذا الدليل الصادق لعام 2025.',
                 'category_en'  => 'Guides',
                 'category_ar'  => 'أدلة',
-                'tags'         => json_encode(['Custom Software', 'Ready-made', 'Jordan', 'ERP', 'Decision Guide']),
+                'tags'         => ['Custom Software', 'Ready-made', 'Jordan', 'ERP', 'Decision Guide'],
                 'body_en'      => '<h2>Custom vs Ready-Made Software: The Key Question</h2>
 <p>One of the most important technology decisions a Jordanian business owner faces is: should we buy an off-the-shelf solution or build something custom? There is no universal answer — the right choice depends on your business size, budget, uniqueness of your processes, and growth plans.</p>
 
@@ -295,7 +289,7 @@ class SeoGuidesSeeder extends Seeder
                 'meta_desc_ar' => 'كيف تجد وتقيّم أفضل شركة برمجيات في الأردن. قائمة مراجعة من 12 سؤالاً يجب طرحها والعلامات التحذيرية وما يبدو عليه العقد العادل.',
                 'category_en'  => 'Guides',
                 'category_ar'  => 'أدلة',
-                'tags'         => json_encode(['Software Company Jordan', 'Choose Developer', 'Guide', 'Jordan Tech']),
+                'tags'         => ['Software Company Jordan', 'Choose Developer', 'Guide', 'Jordan Tech'],
                 'body_en'      => '<h2>Finding the Right Software Development Partner in Jordan</h2>
 <p>Jordan has hundreds of software development companies and freelancers, ranging from one-person shops to agencies with 50+ developers. Choosing the wrong partner can waste months and tens of thousands of dinars. This guide gives you a clear framework for making the right decision.</p>
 
@@ -374,7 +368,7 @@ class SeoGuidesSeeder extends Seeder
                 'meta_desc_ar' => 'كم تكلفة نظام ERP في الأردن؟ قارن تكاليف Odoo وSAP وOracle وERP مخصص بـLaravel. يشمل التطبيق والتدريب والدعم المستمر.',
                 'category_en'  => 'Guides',
                 'category_ar'  => 'أدلة',
-                'tags'         => json_encode(['ERP Cost', 'Jordan', 'Odoo', 'SAP', 'Custom ERP']),
+                'tags'         => ['ERP Cost', 'Jordan', 'Odoo', 'SAP', 'Custom ERP'],
                 'body_en'      => '<h2>ERP System Costs in Jordan (2025)</h2>
 <p>Enterprise Resource Planning (ERP) systems are the backbone of medium and large businesses — managing accounting, HR, inventory, procurement, and operations in one place. In Jordan, ERP adoption has accelerated since 2020, driven by e-invoicing mandates and Jordan Vision 2030 digital transformation goals.</p>
 

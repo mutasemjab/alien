@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Blog;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class SeoTechPagesSeeder extends Seeder
 {
@@ -12,22 +12,16 @@ class SeoTechPagesSeeder extends Seeder
         $pages = $this->pages();
 
         foreach ($pages as $page) {
-            $existing = DB::table('blogs')
-                ->where('slug', $page['slug'])
-                ->orWhere('title_en', $page['title_en'])
-                ->first();
-
-            if ($existing) {
+            if (Blog::where('slug', $page['slug'])->orWhere('title_en', $page['title_en'])->exists()) {
                 $this->command->line("  skip  {$page['slug']}");
                 continue;
             }
 
-            DB::table('blogs')->insert(array_merge($page, [
+            Blog::create(array_merge($page, [
                 'type'         => 'landing_page',
-                'status'       => 'active',
+                'is_active'    => true,
                 'published_at' => now(),
-                'created_at'   => now(),
-                'updated_at'   => now(),
+                'author'       => 'Alien Code',
             ]));
 
             $this->command->info("  seeded {$page['slug']}");
@@ -51,7 +45,7 @@ class SeoTechPagesSeeder extends Seeder
                 'meta_desc_ar' => 'وظّف أفضل مطوري Laravel في الأردن. Alien Code تقدم تطبيقات ويب، APIs، وحلول SaaS بمعمارية نظيفة وتسليم سريع.',
                 'category_en'  => 'Technology',
                 'category_ar'  => 'تقنية',
-                'tags'         => json_encode(['Laravel', 'PHP', 'Web Development', 'Jordan', 'REST API']),
+                'tags'         => ['Laravel', 'PHP', 'Web Development', 'Jordan', 'REST API'],
                 'body_en'      => '<h2>Laravel Development in Jordan</h2>
 <p>Laravel is the most popular PHP framework in Jordan and across the Arab world — powering everything from simple business websites to complex enterprise platforms. Alien Code has built dozens of Laravel applications since 2018, making us one of the most experienced Laravel teams in the country.</p>
 
@@ -114,7 +108,7 @@ class SeoTechPagesSeeder extends Seeder
                 'meta_desc_ar' => 'أفضل مطوري React وNext.js في الأردن. Alien Code تقدم تطبيقات ويب سريعة ومُحسَّنة لمحركات البحث مع SSR وTypeScript وتكامل CMS.',
                 'category_en'  => 'Technology',
                 'category_ar'  => 'تقنية',
-                'tags'         => json_encode(['React', 'Next.js', 'JavaScript', 'Frontend', 'Jordan']),
+                'tags'         => ['React', 'Next.js', 'JavaScript', 'Frontend', 'Jordan'],
                 'body_en'      => '<h2>React &amp; Next.js Development in Jordan</h2>
 <p>React has become the dominant frontend technology across Jordan\'s tech scene, and Next.js has emerged as the go-to choice for production-grade web applications that need both speed and SEO. Alien Code\'s frontend engineers have shipped React projects since 2019 — ranging from single-page dashboards to full-stack Next.js platforms with thousands of daily users.</p>
 
@@ -165,7 +159,7 @@ class SeoTechPagesSeeder extends Seeder
                 'meta_desc_ar' => 'أفضل مطوري Flutter في الأردن. Alien Code تبني تطبيقات iOS وAndroid جميلة متقاطعة المنصات مع دعم RTL العربي.',
                 'category_en'  => 'Technology',
                 'category_ar'  => 'تقنية',
-                'tags'         => json_encode(['Flutter', 'Mobile App', 'iOS', 'Android', 'Jordan']),
+                'tags'         => ['Flutter', 'Mobile App', 'iOS', 'Android', 'Jordan'],
                 'body_en'      => '<h2>Flutter App Development in Jordan</h2>
 <p>Flutter — Google\'s cross-platform UI toolkit — lets us build a single codebase that runs natively on iOS, Android, and the web. For Jordanian businesses, this means cutting app development cost roughly in half compared to building separate native apps, without sacrificing performance or appearance. Alien Code has been Flutter-first since 2020.</p>
 
@@ -217,7 +211,7 @@ class SeoTechPagesSeeder extends Seeder
                 'meta_desc_ar' => 'شركة تطوير Python والذكاء الاصطناعي في الأردن. Alien Code تبني روبوتات محادثة NLP، وتحليلات تنبؤية، وحلول رؤية الحاسوب.',
                 'category_en'  => 'Technology',
                 'category_ar'  => 'تقنية',
-                'tags'         => json_encode(['Python', 'AI', 'Machine Learning', 'NLP', 'Jordan', 'Data Science']),
+                'tags'         => ['Python', 'AI', 'Machine Learning', 'NLP', 'Jordan', 'Data Science'],
                 'body_en'      => '<h2>Python &amp; AI Development in Jordan</h2>
 <p>Artificial intelligence is no longer exclusive to tech giants. Jordanian companies in retail, healthcare, logistics, and finance are adopting AI to automate workflows, understand customers better, and make smarter decisions. Alien Code\'s Python and AI team helps you identify the right problems to solve and implements production-grade solutions — not just demos.</p>
 
@@ -263,7 +257,7 @@ class SeoTechPagesSeeder extends Seeder
                 'meta_desc_ar' => 'شركة تطوير Node.js وAPI في الأردن. Alien Code تقدم REST APIs، خدمات GraphQL، أنظمة WebSocket، ومعمارية الخدمات المصغرة.',
                 'category_en'  => 'Technology',
                 'category_ar'  => 'تقنية',
-                'tags'         => json_encode(['Node.js', 'API', 'JavaScript', 'GraphQL', 'Jordan', 'Backend']),
+                'tags'         => ['Node.js', 'API', 'JavaScript', 'GraphQL', 'Jordan', 'Backend'],
                 'body_en'      => '<h2>Node.js &amp; API Development in Jordan</h2>
 <p>Node.js is the engine behind many of Jordan\'s fastest-growing apps. Its non-blocking I/O model handles thousands of simultaneous connections — ideal for real-time features like live tracking, chat, notifications, and streaming dashboards. Alien Code\'s backend engineers have been building production Node.js services since 2017.</p>
 
