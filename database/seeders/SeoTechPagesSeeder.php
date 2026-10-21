@@ -69,7 +69,7 @@ class SeoTechPagesSeeder extends Seeder
 <p>Every project is built on a proven stack: <strong>Laravel 10/11</strong>, <strong>MySQL / PostgreSQL</strong>, <strong>Redis</strong> for queues and caching, <strong>Vue.js or React</strong> for interactive UIs, <strong>Spatie packages</strong> for roles and media, and <strong>Docker</strong> for reproducible deployments. We follow PSR-12 coding standards, write feature tests with PHPUnit and Pest, and ship through CI/CD pipelines on your preferred hosting provider.</p>
 
 <h2>Why Hire a Local Jordan Laravel Team?</h2>
-<p>Working with a Jordan-based team means same-timezone communication (AST, GMT+3), Arabic + English bilingual development, understanding of Jordan's regulatory landscape (e-Invoice, SSC, income tax), and the ability to meet face-to-face in Amman when needed. Our hourly rates are 40–60% below equivalent UK or US agencies without sacrificing code quality.</p>
+<p>Working with a Jordan-based team means same-timezone communication (AST, GMT+3), Arabic + English bilingual development, understanding of Jordan\'s regulatory landscape (e-Invoice, SSC, income tax), and the ability to meet face-to-face in Amman when needed. Our hourly rates are 40–60% below equivalent UK or US agencies without sacrificing code quality.</p>
 
 <h2>Laravel Expertise Milestones</h2>
 <ul>

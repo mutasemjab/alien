@@ -399,7 +399,7 @@ class SeoGuidesSeeder extends Seeder
 <p>Many Jordanian companies start with Odoo or another package ERP, then migrate to a custom system after 2–3 years because:</p>
 <ul>
 <li>Odoo customisation cost exceeds the custom build cost</li>
-<li>Off-the-shelf systems don't integrate with Jordan-specific APIs (e-Invoice, JODDB, Umniah SMS, eFAWATEERcom)</li>
+<li>Off-the-shelf systems don\'t integrate with Jordan-specific APIs (e-Invoice, JODDB, Umniah SMS, eFAWATEERcom)</li>
 <li>Arabic language support is often an afterthought in international ERP vendors</li>
 <li>Data sovereignty concerns — local storage on Jordan servers</li>
 </ul>
