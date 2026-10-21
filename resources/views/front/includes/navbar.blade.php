@@ -30,6 +30,7 @@
     <li><a href="{{ \Illuminate\Support\Facades\Route::currentRouteName() === 'home' ? '#game' : route('home').'#game' }}">{{ __('front.nav_game') }}</a></li>
     <li><a href="{{ \Illuminate\Support\Facades\Route::currentRouteName() === 'home' ? '#branches' : route('home').'#branches' }}">{{ __('front.nav_branches') }}</a></li>
     <li><a href="{{ route('blog.index') }}" {{ $currentRoute === 'blog.index' ? 'aria-current="page"' : '' }}>{{ __('front.blog_label') ?? 'Blog' }}</a></li>
+    <li><a href="{{ route('tools.index') }}" {{ str_starts_with($currentRoute ?? '', 'tools.') ? 'aria-current="page"' : '' }}>{{ __('front.nav_tools') }}</a></li>
     <li><a href="{{ route('contact') }}" class="nav-cta" {{ $currentRoute === 'contact' ? 'aria-current="page"' : '' }}>{{ __('front.nav_contact') }}</a></li>
 
     {{-- Language switcher --}}

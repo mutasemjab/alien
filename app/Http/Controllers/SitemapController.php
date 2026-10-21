@@ -94,6 +94,26 @@ class SitemapController extends Controller
             ];
         }
 
+        // Free tools hub and individual calculators
+        $toolSlugs = [
+            'tools',
+            'tools/salary-calculator',
+            'tools/income-tax-calculator',
+            'tools/end-of-service',
+            'tools/vat-calculator',
+            'tools/project-cost-estimator',
+        ];
+        foreach ($toolSlugs as $slug) {
+            foreach (['en', 'ar'] as $locale) {
+                $urls[] = [
+                    'loc'        => $siteUrl . '/' . $locale . '/' . $slug,
+                    'lastmod'    => now()->toAtomString(),
+                    'changefreq' => 'monthly',
+                    'priority'   => '0.7',
+                ];
+            }
+        }
+
         return response()
             ->view('sitemap.url-set', compact('urls'))
             ->header('Content-Type', 'application/xml');

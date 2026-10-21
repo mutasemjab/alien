@@ -4,6 +4,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\FrontBlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -41,4 +42,12 @@ Route::group([
 
     // Careers
     Route::post('/careers/apply', [CareerController::class, 'apply'])->name('careers.apply');
+
+    // Free tools / calculators
+    Route::get('/tools',                        [ToolsController::class, 'index'])->name('tools.index');
+    Route::get('/tools/salary-calculator',      [ToolsController::class, 'salary'])->name('tools.salary');
+    Route::get('/tools/income-tax-calculator',  [ToolsController::class, 'incomeTax'])->name('tools.income-tax');
+    Route::get('/tools/end-of-service',         [ToolsController::class, 'endOfService'])->name('tools.end-of-service');
+    Route::get('/tools/vat-calculator',         [ToolsController::class, 'vat'])->name('tools.vat');
+    Route::get('/tools/project-cost-estimator', [ToolsController::class, 'projectEstimator'])->name('tools.project-estimator');
 });
