@@ -57,6 +57,16 @@
       </ul>
     </div>
 
+    {{-- Jordan cities --}}
+    <div class="footer-col">
+      <h4>{{ app()->getLocale() === 'ar' ? 'نخدم في الأردن' : 'Jordan Offices' }}</h4>
+      <ul>
+        @foreach([['amman','Amman','عمّان'],['zarqa','Zarqa','الزرقاء'],['irbid','Irbid','إربد'],['aqaba','Aqaba','العقبة']] as [$slug,$en,$ar])
+          <li><a href="{{ route('locations.show', $slug) }}">{{ app()->getLocale() === 'ar' ? $ar : $en }}</a></li>
+        @endforeach
+      </ul>
+    </div>
+
     {{-- Contact --}}
     <div class="footer-col">
       <h4>{{ __('front.footer_offices') }}</h4>

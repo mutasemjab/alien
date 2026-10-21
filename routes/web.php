@@ -3,6 +3,7 @@
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\FrontBlogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\Route;
@@ -15,10 +16,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 // ── Sitemap & robots (outside locale group — no locale prefix) ─────────
-Route::get('/sitemap.xml',          [SitemapController::class, 'index'])->name('sitemap.index');
-Route::get('/sitemap-pages.xml',    [SitemapController::class, 'pages'])->name('sitemap.pages');
-Route::get('/sitemap-blog.xml',     [SitemapController::class, 'blog'])->name('sitemap.blog');
-Route::get('/sitemap-services.xml', [SitemapController::class, 'services'])->name('sitemap.services');
+Route::get('/sitemap.xml',           [SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap-pages.xml',     [SitemapController::class, 'pages'])->name('sitemap.pages');
+Route::get('/sitemap-blog.xml',      [SitemapController::class, 'blog'])->name('sitemap.blog');
+Route::get('/sitemap-services.xml',  [SitemapController::class, 'services'])->name('sitemap.services');
+Route::get('/sitemap-locations.xml', [SitemapController::class, 'locations'])->name('sitemap.locations');
 
 // ── Localised front-end routes ─────────────────────────────────────────
 Route::group([
@@ -50,4 +52,7 @@ Route::group([
     Route::get('/tools/end-of-service',         [ToolsController::class, 'endOfService'])->name('tools.end-of-service');
     Route::get('/tools/vat-calculator',         [ToolsController::class, 'vat'])->name('tools.vat');
     Route::get('/tools/project-cost-estimator', [ToolsController::class, 'projectEstimator'])->name('tools.project-estimator');
+
+    // Jordan city landing pages
+    Route::get('/jordan/{city}', [LocationController::class, 'show'])->name('locations.show');
 });

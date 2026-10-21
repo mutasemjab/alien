@@ -16,9 +16,10 @@ class SitemapController extends Controller
     {
         $siteUrl  = $this->siteUrl();
         $sitemaps = [
-            ['loc' => $siteUrl . '/sitemap-pages.xml',    'lastmod' => now()->toAtomString()],
-            ['loc' => $siteUrl . '/sitemap-blog.xml',     'lastmod' => now()->toAtomString()],
-            ['loc' => $siteUrl . '/sitemap-services.xml', 'lastmod' => now()->toAtomString()],
+            ['loc' => $siteUrl . '/sitemap-pages.xml',     'lastmod' => now()->toAtomString()],
+            ['loc' => $siteUrl . '/sitemap-blog.xml',      'lastmod' => now()->toAtomString()],
+            ['loc' => $siteUrl . '/sitemap-services.xml',  'lastmod' => now()->toAtomString()],
+            ['loc' => $siteUrl . '/sitemap-locations.xml', 'lastmod' => now()->toAtomString()],
         ];
 
         return response()
@@ -158,6 +159,29 @@ class SitemapController extends Controller
                     'lastmod'    => $service->updated_at?->toAtomString() ?? now()->toAtomString(),
                     'changefreq' => 'monthly',
                     'priority'   => '0.8',
+                ];
+            }
+        }
+
+        return response()
+            ->view('sitemap.url-set', compact('urls'))
+            ->header('Content-Type', 'application/xml');
+    }
+
+    public function locations()
+    {
+        $siteUrl = $this->siteUrl();
+        $urls    = [];
+
+        $cities = ['amman', 'zarqa', 'irbid', 'aqaba'];
+
+        foreach ($cities as $city) {
+            foreach (['en', 'ar'] as $locale) {
+                $urls[] = [
+                    'loc'        => $siteUrl . '/' . $locale . '/jordan/' . $city,
+                    'lastmod'    => now()->toAtomString(),
+                    'changefreq' => 'monthly',
+                    'priority'   => '0.85',
                 ];
             }
         }
