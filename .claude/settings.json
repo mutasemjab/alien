@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(grep -E \"\\\\.\\(txt|xml|webmanifest\\)$\")",
-      "Bash(xargs wc *)"
+      "Bash(xargs wc *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://alien-code.net/sitemap.xml)",
+      "Bash(curl -s https://alien-code.net/robots.txt)"
     ]
   }
 }

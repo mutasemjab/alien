@@ -1,6 +1,15 @@
 @extends('layouts.front')
-@section('meta-title', \App\Models\Setting::getValue('meta_title_'.app()->getLocale(), 'Alien Code'))
-@section('meta-desc', \App\Models\Setting::getValue('meta_desc_'.app()->getLocale(), ''))
+@php
+  $locale = app()->getLocale();
+  $defaultTitle = $locale === 'ar'
+    ? 'شركة برمجة في الأردن | تطوير مواقع وتطبيقات | Alien Code'
+    : 'Software Development Company in Jordan | Web & App Development | Alien Code';
+  $defaultDesc = $locale === 'ar'
+    ? 'Alien Code — شركة برمجة وتطوير برمجيات في الأردن. نبني مواقع إلكترونية، تطبيقات جوال، أنظمة ERP، وحلول برمجية مخصصة للشركات في الأردن.'
+    : 'Alien Code is a software development company in Jordan. We build websites, mobile apps, ERP systems, and custom software for businesses across Jordan and the GCC.';
+@endphp
+@section('meta-title', \App\Models\Setting::getValue('meta_title_'.$locale, $defaultTitle))
+@section('meta-desc', \App\Models\Setting::getValue('meta_desc_'.$locale, $defaultDesc))
 
 @section('content')
 

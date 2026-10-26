@@ -7,8 +7,8 @@
 @endphp
 
 @section('meta-title', $isAr
-  ? 'خدمات تطوير البرمجيات | Alien Code'
-  : 'Software Development Services | Alien Code')
+  ? 'خدمات شركة برمجة في الأردن | تطوير مواقع وتطبيقات | Alien Code'
+  : 'Software Development Services in Jordan | Web & App Development | Alien Code')
 
 @section('meta-desc', $isAr
   ? 'نقدم خدمات تطوير المواقع والتطبيقات والأنظمة المخصصة وتطبيقات الجوال وحلول التجارة الإلكترونية وتكامل الذكاء الاصطناعي للشركات في الأردن والمنطقة.'
