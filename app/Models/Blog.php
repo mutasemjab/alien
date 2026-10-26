@@ -19,10 +19,25 @@ class Blog extends Model
     ];
 
     protected $casts = [
-        'tags'         => 'array',
         'is_active'    => 'boolean',
         'published_at' => 'datetime',
     ];
+
+    public function getTagsAttribute($value): array
+    {
+        if (is_null($value)) return [];
+        if (is_array($value)) return $value;
+        $decoded = json_decode($value, true);
+        if (is_array($decoded)) return $decoded;
+        // Handle double-encoded JSON (stored as json_encode(json_encode([...])))
+        $decoded2 = json_decode($decoded, true);
+        return is_array($decoded2) ? $decoded2 : [];
+    }
+
+    public function setTagsAttribute($value): void
+    {
+        $this->attributes['tags'] = is_array($value) ? json_encode($value) : json_encode([]);
+    }
 
     public function scopeActive($q)       { return $q->where('is_active', true); }
     public function scopePublished($q)    { return $q->where('published_at', '<=', now()); }
