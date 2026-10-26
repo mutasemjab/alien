@@ -188,11 +188,19 @@
   {{-- ── Per-page extra head content ───────────────────────── --}}
   @yield('page-schema')
 
-  {{-- ── Fonts ────────────────────────────────────────────── --}}
+  {{-- ── Fonts (async — non-render-blocking) ────────────────── --}}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Share+Tech+Mono&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&family=Cairo:wght@400;600;700;900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&family=Cairo:wght@400;600;700;900&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  </noscript>
 
+  {{-- ── Critical CSS ─────────────────────────────────────── --}}
+  <link rel="preload" href="{{ asset('assets_front/css/style.css') }}" as="style">
   <link rel="stylesheet" href="{{ asset('assets_front/css/style.css') }}">
   @stack('head')
 </head>
@@ -215,7 +223,7 @@
   @yield('content')
   @include('front.includes.footer')
 
-  <script src="{{ asset('assets_front/js/main.js') }}"></script>
+  <script defer src="{{ asset('assets_front/js/main.js') }}"></script>
   <script>
     const _t=document.getElementById('navToggle'),_m=document.getElementById('navMenu');
     if(_t&&_m){_t.addEventListener('click',()=>{const o=_t.classList.toggle('open');_m.classList.toggle('open',o);_t.setAttribute('aria-expanded',o);});_m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{_t.classList.remove('open');_m.classList.remove('open');_t.setAttribute('aria-expanded',false);}));}
