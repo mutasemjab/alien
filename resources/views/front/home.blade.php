@@ -1,6 +1,7 @@
 @extends('layouts.front')
 @php
   $locale = app()->getLocale();
+  $isAr   = $locale === 'ar';
   $defaultTitle = $locale === 'ar'
     ? 'شركة برمجة في الأردن | تطوير مواقع وتطبيقات | Alien Code'
     : 'Software Development Company in Jordan | Web & App Development | Alien Code';
