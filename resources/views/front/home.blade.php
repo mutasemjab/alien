@@ -21,61 +21,230 @@
   <div class="orb-a hero-glow-orb"></div>
   <div class="orb-b hero-glow-orb"></div>
 
-  <div class="hero-content">
-    <div class="hero-chip">
-      <div class="blink-dot"></div>
-      {{ $hero->trans('badge_text') }}
+  <div class="hero-split">
+
+    {{-- ── Left: Copy ──────────────────────────────────── --}}
+    <div class="hero-left">
+
+      <div class="hero-chip">
+        <div class="blink-dot"></div>
+        {{ $hero->trans('badge_text') }}
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line">
+          <span class="word" style="animation-delay:.3s;">{{ $hero->trans('title_line1') }}</span>
+        </span>
+        <span class="line">
+          <span class="word gold-text" style="animation-delay:.5s;">{{ $hero->trans('title_line2') }}</span>
+        </span>
+        <span class="line">
+          <span class="word" style="animation-delay:.7s;">{{ $hero->trans('title_line3') }}</span>
+        </span>
+      </h1>
+
+      <p class="hero-desc">{{ $hero->trans('description') }}</p>
+
+      <div class="hero-actions">
+        <a href="{{ $hero->btn_primary_url }}" class="btn-gold">
+          {{ $hero->trans('btn_primary_text') }}
+        </a>
+        <a href="{{ $hero->btn_secondary_url }}" class="btn-ghost">
+          {{ $hero->trans('btn_secondary_text') }}
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <div class="cnt" data-target="{{ $hero->stat_projects }}">0</div>
+          <div class="hstat-lbl">{{ __('front.stat_projects') }}</div>
+        </div>
+        <div>
+          <div class="cnt" data-target="{{ $hero->stat_years }}">0</div>
+          <div class="hstat-lbl">{{ __('front.stat_years') }}</div>
+        </div>
+        <div>
+          <div class="cnt" data-target="{{ $hero->stat_engineers }}">0</div>
+          <div class="hstat-lbl">{{ __('front.stat_engineers') }}</div>
+        </div>
+        <div>
+          <div class="cnt" data-target="{{ $hero->stat_satisfaction }}">0</div>
+          <div class="hstat-lbl">{{ __('front.stat_satisfaction') }}</div>
+        </div>
+      </div>
     </div>
 
-    <h1 class="hero-title">
-      <span class="line">
-        <span class="word" style="animation-delay:.3s;">{{ $hero->trans('title_line1') }}</span>
-      </span>
-      <span class="line">
-        <span class="word gold-text" style="animation-delay:.5s;">{{ $hero->trans('title_line2') }}</span>
-      </span>
-      <span class="line">
-        <span class="word" style="animation-delay:.7s;">{{ $hero->trans('title_line3') }}</span>
-      </span>
-    </h1>
+    {{-- ── Right: Dashboard Mockup ─────────────────────── --}}
+    <div class="hero-right">
+      <div class="hero-mockup">
 
-    <div class="type-line" id="typeLine">
-      &gt; <span id="typeText"></span><span class="type-cursor">|</span>
+        {{-- Browser frame --}}
+        <div class="mock-browser">
+          <div class="mock-chrome">
+            <div class="mock-dots"><span></span><span></span><span></span></div>
+            <div class="mock-addressbar">alien-code.net/dashboard</div>
+            <div class="mock-chrome-actions">
+              <span></span><span></span>
+            </div>
+          </div>
+          <div class="mock-body">
+            <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+              <defs>
+                <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#B45309" stop-opacity=".28"/>
+                  <stop offset="100%" stop-color="#B45309" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <!-- bg -->
+              <rect width="480" height="300" fill="#F8F7FD"/>
+
+              <!-- Sidebar -->
+              <rect x="0" y="0" width="68" height="300" fill="#09090F"/>
+              <!-- Brand mark -->
+              <rect x="16" y="13" width="36" height="36" rx="9" fill="#B45309"/>
+              <text x="34" y="36" text-anchor="middle" fill="white" font-size="12" font-family="Arial,sans-serif" font-weight="800">AC</text>
+              <!-- Active nav -->
+              <rect x="11" y="63" width="46" height="26" rx="6" fill="#B45309" opacity=".9"/>
+              <rect x="21" y="72" width="24" height="5" rx="2.5" fill="white"/>
+              <!-- Inactive navs -->
+              <rect x="11" y="95" width="46" height="26" rx="6" fill="white" opacity=".04"/>
+              <rect x="21" y="104" width="20" height="5" rx="2.5" fill="white" opacity=".22"/>
+              <rect x="11" y="127" width="46" height="26" rx="6" fill="white" opacity=".04"/>
+              <rect x="21" y="136" width="26" height="5" rx="2.5" fill="white" opacity=".22"/>
+              <rect x="11" y="159" width="46" height="26" rx="6" fill="white" opacity=".04"/>
+              <rect x="21" y="168" width="18" height="5" rx="2.5" fill="white" opacity=".22"/>
+              <rect x="11" y="191" width="46" height="26" rx="6" fill="white" opacity=".04"/>
+              <rect x="21" y="200" width="28" height="5" rx="2.5" fill="white" opacity=".22"/>
+              <!-- Bottom user -->
+              <circle cx="34" cy="279" r="13" fill="white" opacity=".07"/>
+              <circle cx="34" cy="279" r="9" fill="#B45309" opacity=".55"/>
+
+              <!-- Top bar -->
+              <rect x="68" y="0" width="412" height="40" fill="white"/>
+              <line x1="68" y1="40" x2="480" y2="40" stroke="#E8E6F0" stroke-width="1"/>
+              <text x="82" y="25" fill="#09090F" font-size="9" font-family="Arial,sans-serif" font-weight="800" letter-spacing="1">DASHBOARD</text>
+              <rect x="420" y="11" width="19" height="19" rx="5" fill="#F2F1FA"/>
+              <circle cx="452" cy="20" r="10" fill="#F2F1FA"/>
+              <circle cx="466" cy="20" r="9" fill="#B45309" opacity=".85"/>
+              <text x="466" y="24" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">M</text>
+
+              <!-- KPI CARDS -->
+              <rect x="82" y="52" width="106" height="58" rx="8" fill="white" stroke="#E8E6F0" stroke-width="1"/>
+              <text x="94" y="68" fill="#ABABC6" font-size="7" font-family="Arial,sans-serif" letter-spacing=".6">PROJECTS</text>
+              <text x="94" y="92" fill="#09090F" font-size="20" font-family="Arial,sans-serif" font-weight="800">200+</text>
+              <rect x="149" y="55" width="30" height="13" rx="6.5" fill="#D1FAE5"/>
+              <text x="155" y="65" fill="#059669" font-size="7" font-family="Arial,sans-serif">+24%</text>
+
+              <rect x="198" y="52" width="106" height="58" rx="8" fill="white" stroke="#E8E6F0" stroke-width="1"/>
+              <text x="210" y="68" fill="#ABABC6" font-size="7" font-family="Arial,sans-serif" letter-spacing=".6">EXPERIENCE</text>
+              <text x="210" y="92" fill="#09090F" font-size="20" font-family="Arial,sans-serif" font-weight="800">9+ yrs</text>
+              <rect x="265" y="55" width="30" height="13" rx="6.5" fill="#FEF3C7"/>
+              <text x="268" y="65" fill="#B45309" font-size="7" font-family="Arial,sans-serif">Jordan</text>
+
+              <rect x="314" y="52" width="144" height="58" rx="8" fill="#B45309"/>
+              <text x="326" y="68" fill="rgba(255,255,255,.6)" font-size="7" font-family="Arial,sans-serif" letter-spacing=".6">SATISFACTION</text>
+              <text x="326" y="92" fill="white" font-size="20" font-family="Arial,sans-serif" font-weight="800">98%</text>
+              <rect x="395" y="55" width="34" height="13" rx="6.5" fill="rgba(255,255,255,.2)"/>
+              <text x="399" y="65" fill="white" font-size="7" font-family="Arial,sans-serif">&#9733; 4.9</text>
+
+              <!-- CHART PANEL -->
+              <rect x="82" y="122" width="242" height="162" rx="8" fill="white" stroke="#E8E6F0" stroke-width="1"/>
+              <text x="94" y="138" fill="#ABABC6" font-size="7" font-family="Arial,sans-serif" letter-spacing=".5">PROJECTS DELIVERED · 2024</text>
+              <!-- grid -->
+              <line x1="94" y1="158" x2="314" y2="158" stroke="#F2F1FA" stroke-width="1"/>
+              <line x1="94" y1="178" x2="314" y2="178" stroke="#F2F1FA" stroke-width="1"/>
+              <line x1="94" y1="198" x2="314" y2="198" stroke="#F2F1FA" stroke-width="1"/>
+              <line x1="94" y1="218" x2="314" y2="218" stroke="#F2F1FA" stroke-width="1"/>
+              <line x1="94" y1="264" x2="314" y2="264" stroke="#E8E6F0" stroke-width="1"/>
+              <!-- area -->
+              <path d="M94,250 C110,242 122,254 142,230 C162,206 172,220 192,200 C212,180 222,195 242,172 C262,149 272,163 292,138 L314,124 L314,264 L94,264 Z" fill="url(#areaGrad)"/>
+              <path d="M94,250 C110,242 122,254 142,230 C162,206 172,220 192,200 C212,180 222,195 242,172 C262,149 272,163 292,138 L314,124" fill="none" stroke="#B45309" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- dots -->
+              <circle cx="142" cy="230" r="3.5" fill="white" stroke="#B45309" stroke-width="2"/>
+              <circle cx="192" cy="200" r="3.5" fill="white" stroke="#B45309" stroke-width="2"/>
+              <circle cx="242" cy="172" r="3.5" fill="white" stroke="#B45309" stroke-width="2"/>
+              <circle cx="292" cy="138" r="3.5" fill="white" stroke="#B45309" stroke-width="2"/>
+              <!-- active point + tooltip -->
+              <circle cx="314" cy="124" r="6" fill="#B45309"/>
+              <circle cx="314" cy="124" r="11" fill="#B45309" opacity=".14"/>
+              <rect x="293" y="107" width="42" height="18" rx="4" fill="#09090F"/>
+              <text x="314" y="119" text-anchor="middle" fill="white" font-size="7.5" font-family="Arial" font-weight="bold">+48</text>
+              <polygon points="310,125 314,130 318,125" fill="#09090F"/>
+              <!-- x labels -->
+              <text x="94"  y="275" fill="#ABABC6" font-size="6.5" font-family="Arial">Jan</text>
+              <text x="142" y="275" fill="#ABABC6" font-size="6.5" font-family="Arial">Apr</text>
+              <text x="192" y="275" fill="#ABABC6" font-size="6.5" font-family="Arial">Jul</text>
+              <text x="242" y="275" fill="#ABABC6" font-size="6.5" font-family="Arial">Oct</text>
+              <text x="292" y="275" fill="#ABABC6" font-size="6.5" font-family="Arial">Dec</text>
+
+              <!-- PROJECTS LIST PANEL -->
+              <rect x="336" y="122" width="132" height="162" rx="8" fill="white" stroke="#E8E6F0" stroke-width="1"/>
+              <text x="348" y="138" fill="#ABABC6" font-size="7" font-family="Arial,sans-serif" letter-spacing=".5">ACTIVE PROJECTS</text>
+              <!-- rows -->
+              <rect x="348" y="148" width="8" height="8" rx="2.5" fill="#7C3AED"/>
+              <rect x="362" y="149" width="68" height="5" rx="2.5" fill="#3A3A52" opacity=".75"/>
+              <rect x="362" y="157" width="46" height="3.5" rx="1.75" fill="#ABABC6" opacity=".5"/>
+              <rect x="412" y="147" width="32" height="13" rx="6.5" fill="#D1FAE5"/>
+              <text x="428" y="157" text-anchor="middle" fill="#059669" font-size="6.5" font-family="Arial">Live</text>
+
+              <rect x="348" y="170" width="8" height="8" rx="2.5" fill="#0284C7"/>
+              <rect x="362" y="171" width="58" height="5" rx="2.5" fill="#3A3A52" opacity=".75"/>
+              <rect x="362" y="179" width="40" height="3.5" rx="1.75" fill="#ABABC6" opacity=".5"/>
+              <rect x="412" y="169" width="32" height="13" rx="6.5" fill="#FEF3C7"/>
+              <text x="428" y="179" text-anchor="middle" fill="#B45309" font-size="6.5" font-family="Arial">Dev</text>
+
+              <rect x="348" y="192" width="8" height="8" rx="2.5" fill="#B45309"/>
+              <rect x="362" y="193" width="72" height="5" rx="2.5" fill="#3A3A52" opacity=".75"/>
+              <rect x="362" y="201" width="34" height="3.5" rx="1.75" fill="#ABABC6" opacity=".5"/>
+              <rect x="412" y="191" width="32" height="13" rx="6.5" fill="#D1FAE5"/>
+              <text x="428" y="201" text-anchor="middle" fill="#059669" font-size="6.5" font-family="Arial">Live</text>
+
+              <rect x="348" y="214" width="8" height="8" rx="2.5" fill="#059669"/>
+              <rect x="362" y="215" width="54" height="5" rx="2.5" fill="#3A3A52" opacity=".75"/>
+              <rect x="362" y="223" width="50" height="3.5" rx="1.75" fill="#ABABC6" opacity=".5"/>
+              <rect x="412" y="213" width="32" height="13" rx="6.5" fill="#EDE9FE"/>
+              <text x="428" y="223" text-anchor="middle" fill="#7C3AED" font-size="6.5" font-family="Arial">QA</text>
+
+              <rect x="348" y="236" width="8" height="8" rx="2.5" fill="#DC2626"/>
+              <rect x="362" y="237" width="62" height="5" rx="2.5" fill="#3A3A52" opacity=".75"/>
+              <rect x="362" y="245" width="42" height="3.5" rx="1.75" fill="#ABABC6" opacity=".5"/>
+              <rect x="412" y="235" width="32" height="13" rx="6.5" fill="#D1FAE5"/>
+              <text x="428" y="245" text-anchor="middle" fill="#059669" font-size="6.5" font-family="Arial">Live</text>
+
+              <rect x="348" y="258" width="8" height="8" rx="2.5" fill="#F59E0B"/>
+              <rect x="362" y="259" width="50" height="5" rx="2.5" fill="#3A3A52" opacity=".75"/>
+              <rect x="362" y="267" width="38" height="3.5" rx="1.75" fill="#ABABC6" opacity=".5"/>
+              <rect x="412" y="257" width="32" height="13" rx="6.5" fill="#FEF3C7"/>
+              <text x="428" y="267" text-anchor="middle" fill="#B45309" font-size="6.5" font-family="Arial">Dev</text>
+            </svg>
+          </div>
+        </div>
+
+        {{-- Floating card 1: project delivered --}}
+        <div class="mock-float mf-1">
+          <div class="mf-icon mf-green">&#10003;</div>
+          <div>
+            <div class="mf-title">{{ $isAr ? 'مشروع أُطلق بنجاح' : 'Project Delivered' }}</div>
+            <div class="mf-sub">{{ $isAr ? 'في الموعد المحدد' : 'On time &amp; on budget' }}</div>
+          </div>
+        </div>
+
+        {{-- Floating card 2: tech stack --}}
+        <div class="mock-float mf-2">
+          <div class="mf-stack">
+            <span>Laravel</span><span>React</span><span>Flutter</span><span>AI/ML</span>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <p class="hero-desc">{{ $hero->trans('description') }}</p>
+  </div>{{-- .hero-split --}}
 
-    <div class="hero-actions">
-      <a href="{{ $hero->btn_primary_url }}" class="btn-gold">
-        🚀 {{ $hero->trans('btn_primary_text') }}
-      </a>
-      <a href="{{ $hero->btn_secondary_url }}" class="btn-ghost">
-        🎮 {{ $hero->trans('btn_secondary_text') }}
-      </a>
-    </div>
-
-    <div class="hero-stats">
-      <div>
-        <div class="cnt" data-target="{{ $hero->stat_projects }}">0</div>
-        <div class="hstat-lbl">{{ __('front.stat_projects') }}</div>
-      </div>
-      <div>
-        <div class="cnt" data-target="{{ $hero->stat_years }}">0</div>
-        <div class="hstat-lbl">{{ __('front.stat_years') }}</div>
-      </div>
-      <div>
-        <div class="cnt" data-target="{{ $hero->stat_engineers }}">0</div>
-        <div class="hstat-lbl">{{ __('front.stat_engineers') }}</div>
-      </div>
-      <div>
-        <div class="cnt" data-target="{{ $hero->stat_satisfaction }}">0</div>
-        <div class="hstat-lbl">{{ __('front.stat_satisfaction') }}</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-robot-wrap">
-    <canvas id="robotCanvas" width="420" height="560"></canvas>
+  {{-- hidden: keeps JS null-guarded --}}
+  <div class="hero-robot-wrap" aria-hidden="true" style="display:none;">
+    <canvas id="robotCanvas" width="1" height="1"></canvas>
   </div>
 
   <div class="scroll-ind">
