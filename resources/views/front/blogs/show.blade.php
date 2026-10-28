@@ -101,13 +101,13 @@
         </span>
       @endif
       @foreach($post->tags ?? [] as $tag)
-        <span style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--muted);border-radius:50px;padding:.25rem .9rem;font-size:.72rem;">
+        <span style="background:var(--bg-section);border:1px solid var(--border);color:var(--muted);border-radius:50px;padding:.25rem .9rem;font-size:.72rem;">
           {{ $tag }}
         </span>
       @endforeach
     </div>
 
-    <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.4rem,4vw,2.2rem);line-height:1.25;color:var(--white);margin:0 0 1.2rem;{{ $isAr ? 'direction:rtl;' : '' }}">
+    <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.4rem,4vw,2.2rem);line-height:1.25;color:var(--ink);margin:0 0 1.2rem;{{ $isAr ? 'direction:rtl;' : '' }}">
       {{ $post->trans('title') }}
     </h1>
 
@@ -130,7 +130,7 @@
 
   {{-- Excerpt / lead paragraph --}}
   @if($post->trans('excerpt'))
-  <p style="font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,.75);border-left:3px solid var(--gold);padding-left:1.2rem;margin-bottom:2rem;{{ $isAr ? 'border-left:none;border-right:3px solid var(--gold);padding-left:0;padding-right:1.2rem;direction:rtl;' : '' }}">
+  <p style="font-size:1.05rem;line-height:1.8;color:var(--body);border-left:3px solid var(--gold);padding-left:1.2rem;margin-bottom:2rem;{{ $isAr ? 'border-left:none;border-right:3px solid var(--gold);padding-left:0;padding-right:1.2rem;direction:rtl;' : '' }}">
     {{ $post->trans('excerpt') }}
   </p>
   @endif
@@ -141,22 +141,22 @@
   </div>
 
   {{-- Share --}}
-  <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.06);">
+  <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);">
     <p style="font-size:.78rem;color:var(--muted);font-family:'Orbitron',sans-serif;margin-bottom:.8rem;">SHARE THIS ARTICLE</p>
     <div style="display:flex;gap:.7rem;flex-wrap:wrap;">
       <a href="https://twitter.com/intent/tweet?text={{ urlencode($seoTitle) }}&url={{ urlencode($postUrl) }}"
          target="_blank" rel="noopener"
-         style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--text);padding:.5rem 1rem;border-radius:8px;font-size:.8rem;text-decoration:none;display:flex;align-items:center;gap:.4rem;">
+         style="background:var(--bg-alt);border:1px solid var(--border);color:var(--body);padding:.5rem 1rem;border-radius:8px;font-size:.8rem;text-decoration:none;display:flex;align-items:center;gap:.4rem;">
         𝕏 Twitter
       </a>
       <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode($postUrl) }}"
          target="_blank" rel="noopener"
-         style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--text);padding:.5rem 1rem;border-radius:8px;font-size:.8rem;text-decoration:none;display:flex;align-items:center;gap:.4rem;">
+         style="background:var(--bg-alt);border:1px solid var(--border);color:var(--body);padding:.5rem 1rem;border-radius:8px;font-size:.8rem;text-decoration:none;display:flex;align-items:center;gap:.4rem;">
         💼 LinkedIn
       </a>
       <a href="https://wa.me/?text={{ urlencode($seoTitle.' '.$postUrl) }}"
          target="_blank" rel="noopener"
-         style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--text);padding:.5rem 1rem;border-radius:8px;font-size:.8rem;text-decoration:none;display:flex;align-items:center;gap:.4rem;">
+         style="background:var(--bg-alt);border:1px solid var(--border);color:var(--body);padding:.5rem 1rem;border-radius:8px;font-size:.8rem;text-decoration:none;display:flex;align-items:center;gap:.4rem;">
         💬 WhatsApp
       </a>
     </div>
@@ -185,7 +185,7 @@
           @if($rel->category_en)<span class="wcard-tag">{{ $rel->trans('category') }}</span>@endif
         </div>
         <h3 style="font-size:.92rem;margin:.5rem 0;">
-          <a href="{{ route('blog.show', $rel->slug) }}" style="color:var(--white);text-decoration:none;">
+          <a href="{{ route('blog.show', $rel->slug) }}" style="color:var(--ink);text-decoration:none;">
             {{ $rel->trans('title') }}
           </a>
         </h3>
@@ -204,8 +204,22 @@
 .blog-body {
   font-size: .95rem;
   line-height: 1.9;
-  color: rgba(255,255,255,.78);
+  color: var(--body);
 }
-.blog-body p { margin-bottom: 1.2rem; }
+.blog-body p  { margin-bottom: 1.2rem; }
+.blog-body h2 { font-family:'Orbitron',sans-serif; font-size:1.1rem; color:var(--ink); margin:2rem 0 .8rem; }
+.blog-body h3 { font-family:'Orbitron',sans-serif; font-size:.95rem; color:var(--gold); margin:1.5rem 0 .6rem; }
+.blog-body ul,
+.blog-body ol { padding-left:1.5rem; margin-bottom:1.2rem; }
+.blog-body li { margin-bottom:.5rem; color:var(--body); }
+.blog-body a  { color:var(--gold); text-underline-offset:3px; }
+.blog-body strong { color:var(--ink); }
+.blog-body blockquote {
+  border-left:3px solid var(--gold);
+  padding-left:1.2rem;
+  margin:1.5rem 0;
+  color:var(--muted);
+  font-style:italic;
+}
 </style>
 @endpush

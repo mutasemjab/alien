@@ -58,8 +58,8 @@
       ['icon'=>'🚀', 'val'=>'48h',              'val_ar'=>'٤٨ ساعة',              'label'=>'Kickoff Guarantee',    'label_ar'=>'ضمان الانطلاق'],
     ]; @endphp
     @foreach($stats as $stat)
-    <div style="flex:1;min-width:140px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
-                border-radius:10px;padding:1rem;text-align:center;">
+    <div style="flex:1;min-width:140px;background:var(--surface);border:1px solid var(--border);
+                border-radius:10px;padding:1rem;text-align:center;box-shadow:var(--shadow-xs);">
       <div style="font-size:1.4rem;margin-bottom:.3rem;">{{ $stat['icon'] }}</div>
       <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;color:var(--gold);">
         {{ $isAr ? $stat['val_ar'] : $stat['val'] }}
@@ -88,18 +88,18 @@
   </div>
 
   {{-- Services grid --}}
-  <h2 style="font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--white);margin:2rem 0 1.2rem;">
+  <h2 style="font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--ink);margin:2rem 0 1.2rem;">
     {{ $isAr
       ? "🛠 ما نبنيه للشركات في {$city['name_ar']}"
       : "🛠 WHAT WE BUILD FOR {$city['name_en']} BUSINESSES" }}
   </h2>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:2.5rem;">
     @foreach($services as $service)
-    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
-                border-radius:10px;padding:1.2rem;display:flex;gap:.8rem;align-items:flex-start;">
+    <div style="background:var(--surface);border:1px solid var(--border);
+                border-radius:10px;padding:1.2rem;display:flex;gap:.8rem;align-items:flex-start;box-shadow:var(--shadow-xs);">
       <span style="font-size:1.5rem;flex-shrink:0;">{{ $service->icon }}</span>
       <div>
-        <h3 style="font-family:'Orbitron',sans-serif;font-size:.82rem;color:var(--white);margin:0 0 .3rem;">
+        <h3 style="font-family:'Orbitron',sans-serif;font-size:.82rem;color:var(--ink);margin:0 0 .3rem;">
           @if($service->has_detail)
             <a href="{{ route('services.show', $service->slug) }}" style="color:inherit;text-decoration:none;">
               {{ $service->trans('title') }}
@@ -125,8 +125,8 @@
     </h2>
     <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.8rem;">
       @foreach($isAr ? $city['why_ar'] : $city['why_en'] as $point)
-      <li style="font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.7;
-                 padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.06);">
+      <li style="font-size:.9rem;color:var(--body);line-height:1.7;
+                 padding:.6rem 0;border-bottom:1px solid var(--border);">
         {{ $point }}
       </li>
       @endforeach
@@ -137,7 +137,7 @@
   <div style="margin:2.5rem 0;padding:2.5rem;background:rgba(245,168,0,.05);
               border:1px solid rgba(245,168,0,.2);border-radius:14px;text-align:center;">
     <div class="orb-a" style="opacity:.2;"></div>
-    <h2 style="font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--white);margin:0 0 .8rem;">
+    <h2 style="font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--ink);margin:0 0 .8rem;">
       {{ $isAr
         ? "هل أنت في {$city['name_ar']}؟ نحن جاهزون."
         : "Based in {$city['name_en']}? Let\'s Build." }}
@@ -154,12 +154,12 @@
 
   {{-- FAQ --}}
   <div style="margin-top:2.5rem;">
-    <h2 style="font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--white);margin:0 0 1.5rem;">
+    <h2 style="font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--ink);margin:0 0 1.5rem;">
       {{ $isAr ? 'أسئلة شائعة' : 'Frequently Asked Questions' }}
     </h2>
     @foreach($isAr ? $city['faqs_ar'] : $city['faqs_en'] as $faq)
-    <details style="border-bottom:1px solid rgba(255,255,255,.06);padding:.8rem 0;">
-      <summary style="font-size:.88rem;color:var(--white);cursor:pointer;list-style:none;
+    <details style="border-bottom:1px solid var(--border);padding:.8rem 0;">
+      <summary style="font-size:.88rem;color:var(--ink);cursor:pointer;list-style:none;
                       display:flex;justify-content:space-between;align-items:center;gap:1rem;">
         <span>{{ $faq['q'] }}</span>
         <span style="color:var(--gold);flex-shrink:0;">+</span>
@@ -182,11 +182,11 @@
       @foreach($others as [$slug, $nameEn, $nameAr])
         @if($slug !== $city['slug'])
         <a href="{{ route('locations.show', $slug) }}"
-           style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+           style="background:var(--bg-alt);border:1px solid var(--border);
                   border-radius:8px;padding:.5rem 1.2rem;font-size:.8rem;font-family:'Orbitron',sans-serif;
                   color:var(--muted);text-decoration:none;transition:color .2s,border-color .2s;"
-           onmouseover="this.style.color='var(--gold)';this.style.borderColor='rgba(245,168,0,.3)'"
-           onmouseout="this.style.color='var(--muted)';this.style.borderColor='rgba(255,255,255,.08)'">
+           onmouseover="this.style.color='var(--gold)';this.style.borderColor='rgba(180,83,9,.3)'"
+           onmouseout="this.style.color='var(--muted)';this.style.borderColor='rgba(9,9,15,.08)'">
           {{ $isAr ? $nameAr : $nameEn }}
         </a>
         @endif

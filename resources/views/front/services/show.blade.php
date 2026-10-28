@@ -60,12 +60,12 @@
     @endif
 
     <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);
-               line-height:1.2;color:var(--white);margin:0 0 1rem;
+               line-height:1.2;color:var(--ink);margin:0 0 1rem;
                {{ $isAr ? 'direction:rtl;' : '' }}">
       {{ $service->trans('title') }}
     </h1>
 
-    <p style="font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,.75);
+    <p style="font-size:1.05rem;line-height:1.8;color:var(--body);
               border-left:3px solid var(--gold);padding-left:1.2rem;
               {{ $isAr ? 'border-left:none;border-right:3px solid var(--gold);padding-left:0;padding-right:1.2rem;direction:rtl;' : '' }}">
       {{ $service->trans('description') }}
@@ -82,7 +82,7 @@
   {{-- CTA --}}
   <div style="margin-top:3rem;padding:2rem;background:rgba(245,168,0,.05);
               border:1px solid rgba(245,168,0,.2);border-radius:12px;text-align:center;">
-    <h2 style="font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--white);margin:0 0 .8rem;">
+    <h2 style="font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--ink);margin:0 0 .8rem;">
       {{ $isAr ? 'هل تحتاج هذه الخدمة؟' : 'Interested in This Service?' }}
     </h2>
     <p style="color:var(--muted);font-size:.9rem;margin:0 0 1.5rem;">
@@ -155,14 +155,18 @@
 .service-body {
   font-size: .95rem;
   line-height: 1.9;
-  color: rgba(255,255,255,.78);
+  color: var(--body);
 }
 .service-body p  { margin-bottom: 1.2rem; }
-.service-body h2 { font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--white);margin:2rem 0 .8rem; }
+.service-body h2 { font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--ink);margin:2rem 0 .8rem; }
 .service-body h3 { font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);margin:1.5rem 0 .6rem; }
 .service-body ul,
 .service-body ol { padding-left:1.5rem;margin-bottom:1.2rem; }
-.service-body li { margin-bottom:.5rem; }
+.service-body li { margin-bottom:.5rem; color:var(--body); }
 .service-body a  { color:var(--gold);text-underline-offset:3px; }
+.service-body strong { color:var(--ink); }
+.service-body table { border-collapse:collapse; width:100%; margin-bottom:1.2rem; }
+.service-body th { color:var(--ink); border-bottom:2px solid var(--border-gold); padding:.5rem; font-size:.82rem; }
+.service-body td { color:var(--body); padding:.5rem; border-bottom:1px solid var(--border); font-size:.82rem; }
 </style>
 @endpush

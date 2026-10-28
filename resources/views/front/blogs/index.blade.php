@@ -55,7 +55,7 @@
           @endforeach
         </div>
         <h2 style="font-size:1rem;margin:.6rem 0 .4rem;">
-          <a href="{{ route('blog.show', $post->slug) }}" style="color:var(--white);text-decoration:none;">
+          <a href="{{ route('blog.show', $post->slug) }}" style="color:var(--ink);text-decoration:none;">
             {{ $post->trans('title') }}
           </a>
         </h2>

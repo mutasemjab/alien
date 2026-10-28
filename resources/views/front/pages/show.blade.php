@@ -51,7 +51,7 @@
         {{ $post->trans('category') }}
       </span>
       @foreach($post->tags ?? [] as $tag)
-        <span style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+        <span style="background:var(--bg-section);border:1px solid var(--border);
                      color:var(--muted);border-radius:50px;padding:.25rem .9rem;font-size:.72rem;">
           {{ $tag }}
         </span>
@@ -60,13 +60,13 @@
     @endif
 
     <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.5rem,4vw,2.4rem);
-               line-height:1.25;color:var(--white);margin:0 0 1.2rem;
+               line-height:1.25;color:var(--ink);margin:0 0 1.2rem;
                {{ $isAr ? 'direction:rtl;' : '' }}">
       {{ $post->trans('title') }}
     </h1>
 
     @if($post->trans('excerpt'))
-    <p style="font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,.75);
+    <p style="font-size:1.05rem;line-height:1.8;color:var(--body);
               border-left:3px solid var(--gold);padding-left:1.2rem;
               {{ $isAr ? 'border-left:none;border-right:3px solid var(--gold);padding-left:0;padding-right:1.2rem;direction:rtl;' : '' }}">
       {{ $post->trans('excerpt') }}
@@ -91,7 +91,7 @@
   {{-- Primary CTA --}}
   <div style="margin-top:3rem;padding:2rem;background:rgba(245,168,0,.05);
               border:1px solid rgba(245,168,0,.2);border-radius:12px;text-align:center;">
-    <h2 style="font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--white);margin:0 0 .8rem;">
+    <h2 style="font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--ink);margin:0 0 .8rem;">
       {{ $isAr ? 'هل تريد البدء؟' : 'Ready to Start Your Project?' }}
     </h2>
     <p style="color:var(--muted);font-size:.9rem;margin:0 0 1.5rem;">
@@ -114,12 +114,13 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;">
     @foreach($related as $rel)
     <a href="{{ route('blog.show', $rel->slug) }}"
-       style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
-              border-radius:10px;padding:1.4rem;text-decoration:none;display:block;">
+       style="background:var(--surface);border:1px solid var(--border);
+              border-radius:10px;padding:1.4rem;text-decoration:none;display:block;
+              box-shadow:var(--shadow-xs);transition:box-shadow .2s,border-color .2s;">
       <span style="font-size:.7rem;font-family:'Orbitron',sans-serif;color:var(--gold);">
         {{ $rel->trans('category') }}
       </span>
-      <p style="font-size:.88rem;color:var(--white);margin:.5rem 0 0;line-height:1.5;">
+      <p style="font-size:.88rem;color:var(--ink);margin:.5rem 0 0;line-height:1.5;">
         {{ Str::limit($rel->trans('title'), 70) }}
       </p>
     </a>
@@ -163,19 +164,26 @@
 .page-body {
   font-size: .95rem;
   line-height: 1.9;
-  color: rgba(255,255,255,.78);
+  color: var(--body);
 }
 .page-body p  { margin-bottom: 1.2rem; }
-.page-body h2 { font-family:'Orbitron',sans-serif;font-size:1.15rem;color:var(--white);margin:2.2rem 0 .8rem; }
+.page-body h2 { font-family:'Orbitron',sans-serif;font-size:1.15rem;color:var(--ink);margin:2.2rem 0 .8rem; }
 .page-body h3 { font-family:'Orbitron',sans-serif;font-size:.95rem;color:var(--gold);margin:1.6rem 0 .6rem; }
 .page-body ul,
 .page-body ol { padding-left:1.5rem;margin-bottom:1.2rem; }
-.page-body li { margin-bottom:.5rem; }
+.page-body li { margin-bottom:.5rem; color:var(--body); }
 .page-body a  { color:var(--gold);text-underline-offset:3px; }
-.page-body strong { color:var(--white); }
+.page-body strong { color:var(--ink); }
+.page-body blockquote {
+  border-left:3px solid var(--gold);
+  padding-left:1.2rem;
+  margin:1.5rem 0;
+  color:var(--muted);
+  font-style:italic;
+}
 .page-body table { width:100%;border-collapse:collapse;margin-bottom:1.5rem; }
 .page-body th,
-.page-body td { padding:.6rem .9rem;border:1px solid rgba(255,255,255,.08);font-size:.88rem; }
-.page-body th { background:rgba(245,168,0,.08);color:var(--gold); }
+.page-body td { padding:.6rem .9rem;border:1px solid var(--border);font-size:.88rem; }
+.page-body th { background:rgba(180,83,9,.06);color:var(--gold); }
 </style>
 @endpush

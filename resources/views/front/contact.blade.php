@@ -96,7 +96,7 @@
 
     {{-- Contact Form --}}
     <div class="wcard" style="padding:2rem;">
-      <h2 style="font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--white);margin:0 0 1.5rem;">
+      <h2 style="font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--ink);margin:0 0 1.5rem;">
         {{ $isAr ? 'أرسل لنا رسالة' : 'Send Us a Message' }}
       </h2>
 
@@ -118,8 +118,8 @@
                  value="{{ old('name') }}"
                  required maxlength="100"
                  placeholder="{{ $isAr ? 'اسمك' : 'Your name' }}"
-                 style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-                        border-radius:8px;padding:.7rem 1rem;color:var(--white);font-size:.9rem;
+                 style="width:100%;background:#fff;border:1px solid var(--border-mid);
+                        border-radius:8px;padding:.7rem 1rem;color:var(--ink);font-size:.9rem;
                         outline:none;box-sizing:border-box;">
           @error('name')<p style="color:#ff6b6b;font-size:.78rem;margin:.3rem 0 0;">{{ $message }}</p>@enderror
         </div>
@@ -133,8 +133,8 @@
                  value="{{ old('email') }}"
                  required
                  placeholder="{{ $isAr ? 'بريدك الإلكتروني' : 'your@email.com' }}"
-                 style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-                        border-radius:8px;padding:.7rem 1rem;color:var(--white);font-size:.9rem;
+                 style="width:100%;background:#fff;border:1px solid var(--border-mid);
+                        border-radius:8px;padding:.7rem 1rem;color:var(--ink);font-size:.9rem;
                         outline:none;box-sizing:border-box;">
           @error('email')<p style="color:#ff6b6b;font-size:.78rem;margin:.3rem 0 0;">{{ $message }}</p>@enderror
         </div>
@@ -147,8 +147,8 @@
           <textarea id="contact_message" name="message"
                     required rows="5"
                     placeholder="{{ $isAr ? 'أخبرنا عن مشروعك...' : 'Tell us about your project...' }}"
-                    style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-                           border-radius:8px;padding:.7rem 1rem;color:var(--white);font-size:.9rem;
+                    style="width:100%;background:#fff;border:1px solid var(--border-mid);
+                           border-radius:8px;padding:.7rem 1rem;color:var(--ink);font-size:.9rem;
                            outline:none;box-sizing:border-box;resize:vertical;">{{ old('message') }}</textarea>
           @error('message')<p style="color:#ff6b6b;font-size:.78rem;margin:.3rem 0 0;">{{ $message }}</p>@enderror
         </div>
