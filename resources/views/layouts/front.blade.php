@@ -200,8 +200,8 @@
   </noscript>
 
   {{-- ── Critical CSS ─────────────────────────────────────── --}}
-  <link rel="preload" href="{{ asset('assets_front/css/style.css') }}?v=3" as="style">
-  <link rel="stylesheet" href="{{ asset('assets_front/css/style.css') }}?v=3">
+  <link rel="preload" href="{{ asset('assets_front/css/style.css') }}?v=4" as="style">
+  <link rel="stylesheet" href="{{ asset('assets_front/css/style.css') }}?v=4">
   @stack('head')
 </head>
 <body>
