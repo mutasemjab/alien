@@ -5,7 +5,11 @@
       "Bash(xargs wc *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://alien-code.net/sitemap.xml)",
       "Bash(curl -s https://alien-code.net/robots.txt)",
-      "Bash(php artisan *)"
+      "Bash(php artisan *)",
+      "Bash(cd /d c:\\\\xampp\\\\htdocs\\\\alien)",
+      "Bash(dir /s /b)",
+      "PowerShell(\\(Get-Item \"c:\\\\xampp\\\\htdocs\\\\alien\\\\assets_front\\\\css\\\\style.css\"\\).Length, \\(Get-Item \"c:\\\\xampp\\\\htdocs\\\\alien\\\\assets_front\\\\js\\\\main.js\"\\).Length)",
+      "PowerShell(Head -50)"
     ]
   }
 }
