@@ -7,9 +7,12 @@
     @php $logoPath = \App\Models\Setting::getValue('logo'); @endphp
     @if($logoPath)
       <img src="{{ asset('assets/admin/uploads/' . $logoPath) }}"
-           alt="{{ \App\Models\Setting::getValue('site_name_'.app()->getLocale(), 'Alien Code') }}">
+           alt="{{ \App\Models\Setting::getValue('site_name_'.app()->getLocale(), 'Alien Code') }}"
+           style="height:36px;object-fit:contain;">
     @else
-      <img src="{{ asset('images/logo.png') }}" alt="Alien Code">
+      <img src="{{ asset('images/logo.svg') }}" alt="Alien Code"
+           style="height:36px;object-fit:contain;"
+           onerror="this.src='{{ asset('images/logo.png') }}'">
     @endif
   </a>
 

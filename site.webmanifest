@@ -1,0 +1,13 @@
+{
+  "name": "Alien Code",
+  "short_name": "Alien Code",
+  "description": "Software Development Company in Jordan",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050310",
+  "theme_color": "#f5a800",
+  "icons": [
+    { "src": "/images/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/images/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
